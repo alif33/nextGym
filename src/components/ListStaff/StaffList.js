@@ -16,7 +16,7 @@ const StaffList = () => {
             <h4 className="card-title">Member Lists</h4>
           </div>
          
-          <div className="table-responsive">
+          <div className="table-responsive" style={staffs.length <= 4 ? {}: {height: '200px'}}>
             <table className="table">
               <thead>
                 <tr>
