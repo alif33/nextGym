@@ -1,13 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import Barcode from "react-barcode";
 import { useForm } from "react-hook-form";
 import AdminLayout from "../../../src/components/AdminLayout/AdminLayout";
+import { postData } from "../../../__lib__/helpers/HttpService";
 import { adminAuth } from "../../../__lib__/helpers/requireAuthentication";
 
 const Add = () => {
-
+  const [disable, setDisable] = useState(false)
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
-  const onSubmit = data => console.log(data);
+  const {image, setImage} = useState([]);
+  const handleImage = (e) => {
+    console.log(e)
+  }
+
+  const onSubmit = data => {
+    console.log(data)
+    setDisable(true)
+    if (watch.image.length) {
+      const newData = {...data, image: image[0]}
+      postData('/admin/member', data, setDisable)
+      .then(res => {
+        console.log(res)
+      })
+    }
+  };
+  
   
   return (
     <AdminLayout>
@@ -189,30 +206,32 @@ const Add = () => {
                       <label className="d-block form-label">Gender</label>
                       <div className="form-check my-50">
                         <input
-                          // {...register("gender", { required: true })} 
+                          {...register("gender", { required: true })} 
                           type="radio"
-                          id="gender"
-                          name="gender1"
+                          id="male"
+                          name="gender"
+                          value="male"
                           className="form-check-input"
                         />
                         <label
                           className="form-check-label"
-                          htmlFor="gender1"
+                          htmlFor="male"
                         >
                           Male
                         </label>
                       </div>
                       <div className="form-check">
                         <input
-                        //  {...register("gender", { required: true })} 
+                         {...register("gender", { required: true })} 
                           type="radio"
-                          id="gender"
+                          id="femail"
                           name="gender"
+                          value="femail"
                           className="form-check-input"
                         />
                         <label
                           className="form-check-label"
-                          htmlFor="gender"
+                          htmlFor="female"
                         >
                           Female
                         </label>
@@ -327,7 +346,7 @@ const Add = () => {
                         Profile pic
                       </label>
                       <input
-                        {...register("image", { required: true })} 
+                        onChange={(e) => handleImage(e)}
                         className="form-control"
                         type="file"
                         id="customFile1"

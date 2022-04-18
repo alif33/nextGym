@@ -7,7 +7,6 @@ const AdminSidebar = ({ toggle, setToggle }) => {
   const [subOpen, setSubOpen] = useState({});
    
  
-  console.log(subOpen)
 
   useEffect(() => {
     // const closeSidebar = (e) => {
