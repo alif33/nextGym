@@ -1,7 +1,39 @@
+import { useRouter } from 'next/router';
 import React, { useState } from "react";
-
+import { useForm } from "react-hook-form";
+import Cookies from 'universal-cookie';
+import { postData } from "./../../__lib__/helpers/HttpService";
 const Login = () => {
-  const [passShow, setPassShow] = useState('password');
+  const cookies = new Cookies()
+  const [disable, setDisable] = useState(false);
+  const [passShow, setPassShow] = useState("password");
+  const router = useRouter()
+  const {
+    register,
+    handleSubmit,
+    watch,
+    reset,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => {
+    setDisable(true);
+    postData("admin/login", data, setDisable).then((res) => {
+      if (res?.success) {
+        cookies.set(
+          "_info",
+          JSON.stringify({
+            token: res.token,
+            user: res.user,
+          }),
+          { path: "/admin/dashboard" }
+        );
+        reset();
+        router.push({
+          pathname: "/admin/dashboard",
+        });
+      }
+    });
+  };
 
   return (
     <div className="vertical-layout vertical-menu-modern blank-page navbar-floating footer-static">
@@ -106,21 +138,21 @@ const Login = () => {
                       Please sign-in to your account and start the adventure
                     </p>
                     <form
+                      onSubmit={handleSubmit(onSubmit)}
                       className="auth-login-form mt-2"
-                      action="index.html"
-                      method="POST"
                     >
                       <div className="mb-1">
                         <label htmlFor="login-email" className="form-label">
                           Email
                         </label>
                         <input
+                          {...register("email", { required: true })}
                           type="text"
                           className="form-control"
-                          id="login-email"
-                          name="login-email"
+                          id="email"
+                          name="email"
                           placeholder="john@example.com"
-                          aria-describedby="login-email"
+                          aria-describedby="email"
                           tabIndex={1}
                           autoFocus
                         />
@@ -139,10 +171,11 @@ const Login = () => {
                         </div>
                         <div className="input-group input-group-merge form-password-toggle">
                           <input
-                            type={ passShow ? 'password': 'text'}
+                            {...register("password", { required: true })}
+                            type={passShow ? "password" : "text"}
                             className="form-control form-control-merge"
-                            id="login-password"
-                            name="login-password"
+                            id="password"
+                            name="password"
                             tabIndex={2}
                             placeholder="············"
                             aria-describedby="login-password"
@@ -184,8 +217,6 @@ const Login = () => {
                                 <circle cx={12} cy={12} r={3} />
                               </svg>
                             )}
-
-                          
                           </span>
                         </div>
                       </div>
