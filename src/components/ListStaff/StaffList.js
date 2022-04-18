@@ -1,7 +1,13 @@
-import React from "react";
-import { staffData } from "./StaffData";
+import React, { useEffect, useState } from "react";
+import { getData } from './../../../__lib__/helpers/HttpService';
 import StaffTable from "./StaffTable";
 const StaffList = () => {
+
+  const [staffs, setStaffs] = useState([])
+  useEffect(()=> {
+    getData('/admin/staffs')
+    .then(data=> setStaffs(data))
+  },[])
   return (
     <div className="row" id="basic-table">
       <div className="col-12">
@@ -16,14 +22,14 @@ const StaffList = () => {
                 <tr>
                   <th>Photo</th>
                   <th>Name</th>
-                  <th>Positon</th>
+                  <th>Position</th>
                   <th>Status</th>
-                  <th>ETC</th>
+                  <th>Salary</th>
                   <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
-               {staffData.map((data, i) => <StaffTable key={i} data={data}/>)}
+               {staffs.map((data, i) => <StaffTable key={i} data={data}/>)}
               </tbody>
             </table>
           </div>

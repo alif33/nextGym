@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 
 const MemberTable = ({data}) => {
+  console.log(data)
     const [toggle, setToggle] = useState(false)
-
-    
     useEffect(() => {
         const closeAction = (e) => {
           if (e.path[1].tagName !== 'BUTTON') {
@@ -21,19 +20,19 @@ const MemberTable = ({data}) => {
       <tr>
         <td>
           <img
-            src={data.img}
+            src={data.image}
             className="me-75"
             height={20}
             width={20}
-            alt="Angular"
+            alt="name"
           />
         </td>
-        <td>{data.name}</td>
-        <td>{data.startDate}</td>
-        <td>{data.expiredDate}</td>
+        <td>{`${data.firstName} ${data.lastName}`}</td>
+        <td>{new Date(data._valid).toLocaleDateString()}</td>
+        <td>{new Date(data.valid_).toLocaleDateString()}</td>
         <td>
           <span className={`badge rounded-pill badge-light-${data.status === 'Active' ? 'primary' : 'danger'} me-1`}>
-            {data.status}
+            {'Active'}
           </span>
         </td>
         <td>

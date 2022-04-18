@@ -3,7 +3,9 @@ import AdminLayout from '../../../src/components/AdminLayout/AdminLayout';
 import { adminAuth } from '../../../__lib__/helpers/requireAuthentication';
 import MemberList from './../../../src/components/MemberList/MemberList';
 
+
 const List = () => {
+
     return (
         <AdminLayout>
              <div className="content-header row">

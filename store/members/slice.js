@@ -1,17 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit"
 
-export const companySlice = createSlice({
-    name: "companies",
+export const memberSlice = createSlice({
+    name: "members",
     initialState: {
-        companyList: [],
+        memberList: [],
         isLoading: true
 
     },
     reducers: {
-        setCompanies: (state, action) => {
+        setMembers: (state, action) => {
             return {
                 ...state,
-                companyList: action.payload,
+                memberList: action.payload,
                 isLoading: false
             }
         },

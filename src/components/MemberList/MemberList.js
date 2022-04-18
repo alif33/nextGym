@@ -1,8 +1,17 @@
-import React from "react";
-import { memberData } from "./MemberData";
+import React, { useEffect, useState } from "react";
+import { getData } from './../../../__lib__/helpers/HttpService';
 import MemberTable from "./MemberTable";
 
 const MemberList = () => {
+  const [members, setMembers] = useState([])
+useEffect(()=>{
+  getData('/admin/members')
+  .then(data => {
+    setMembers(data)
+  })
+},[])
+
+  
   return (
     <div className="row" id="basic-table">
       <div className="col-12">
@@ -24,7 +33,7 @@ const MemberList = () => {
                 </tr>
               </thead>
               <tbody>
-               {memberData.map((data, i) => <MemberTable key={i} data={data}/>)}
+               {members.map((data, i) => <MemberTable key={i} data={data}/>)}
               </tbody>
             </table>
           </div>

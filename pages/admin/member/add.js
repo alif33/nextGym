@@ -8,6 +8,7 @@ const Add = () => {
 
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
   const onSubmit = data => console.log(data);
+  
   return (
     <AdminLayout>
       <div className="content-header row">
@@ -188,22 +189,22 @@ const Add = () => {
                       <label className="d-block form-label">Gender</label>
                       <div className="form-check my-50">
                         <input
-                          {...register("gender", { required: true })} 
+                          // {...register("gender", { required: true })} 
                           type="radio"
                           id="gender"
-                          name="gender"
+                          name="gender1"
                           className="form-check-input"
                         />
                         <label
                           className="form-check-label"
-                          htmlFor="gender"
+                          htmlFor="gender1"
                         >
                           Male
                         </label>
                       </div>
                       <div className="form-check">
                         <input
-                         {...register("gender", { required: true })} 
+                        //  {...register("gender", { required: true })} 
                           type="radio"
                           id="gender"
                           name="gender"

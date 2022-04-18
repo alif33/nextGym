@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 
 const StaffTable = ({data}) => {
-    const [toggle, setToggle] = useState(false)
+  const {image,position, firstName, lastName, salary} = data;
 
-    
+    const [toggle, setToggle] = useState(false)
     useEffect(() => {
         const closeAction = (e) => {
           if (e.path[1].tagName !== 'BUTTON') {
@@ -21,22 +21,22 @@ const StaffTable = ({data}) => {
       <tr>
         <td>
           <img
-            src={data.img}
+            src={data.iamge}
             className="me-75"
             height={20}
             width={20}
             alt="Angular"
           />
         </td>
-        <td>{data.name}</td>
-        <td>{data.position}</td>
+        <td>{`${firstName} ${lastName}`}</td>
+        <td>{position}</td>
         
         <td>
           <span className={`badge rounded-pill badge-light-${data.status === 'Active' ? 'primary' : 'danger'} me-1`}>
-            {data.status}
+            {'Active'}
           </span>
         </td>
-        <td>{data.etc}</td>
+        <td>{'$' + salary}</td>
         <td>
           <div className="dropdown">
             <button
