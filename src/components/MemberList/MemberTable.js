@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 
 const MemberTable = ({data}) => {
-  console.log(data)
     const [toggle, setToggle] = useState(false)
     useEffect(() => {
         const closeAction = (e) => {

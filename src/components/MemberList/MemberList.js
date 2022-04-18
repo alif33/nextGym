@@ -20,7 +20,7 @@ useEffect(()=>{
             <h4 className="card-title">Member Lists</h4>
           </div>
          
-          <div className="table-responsive">
+          <div className="table-responsive" style={members.length < 5 ? {height: '200px'}: {}}>
             <table className="table">
               <thead>
                 <tr>
