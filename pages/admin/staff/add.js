@@ -1,6 +1,7 @@
 import React from "react";
 import AddStaff from "../../../src/components/AddStaff/AddStaff";
 import AdminLayout from "../../../src/components/AdminLayout/AdminLayout";
+import { adminAuth } from "../../../__lib__/helpers/requireAuthentication";
 
 const add = () => {
   return (
@@ -146,3 +147,10 @@ const add = () => {
 };
 
 export default add;
+
+
+export const getServerSideProps = adminAuth(context => {
+  return {
+      props: {}
+  }
+})

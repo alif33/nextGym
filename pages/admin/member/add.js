@@ -1,7 +1,13 @@
 import React from "react";
 import Barcode from "react-barcode";
+import { useForm } from "react-hook-form";
 import AdminLayout from "../../../src/components/AdminLayout/AdminLayout";
+import { adminAuth } from "../../../__lib__/helpers/requireAuthentication";
+
 const Add = () => {
+
+  const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  const onSubmit = data => console.log(data);
   return (
     <AdminLayout>
       <div className="content-header row">
@@ -144,7 +150,8 @@ const Add = () => {
               <h4 className="card-title">Add Member</h4>
             </div>
             <div className="card-body">
-              <form className="form">
+
+              <form onSubmit={handleSubmit(onSubmit)} className="form">
                 <div className="row">
                   <div className="col-md-6 col-12">
                     <div className="mb-1">
@@ -152,11 +159,12 @@ const Add = () => {
                         First Name
                       </label>
                       <input
+                      {...register("firstName", { required: true })} 
                         type="text"
                         id="first-name-column"
                         className="form-control"
                         placeholder="First Name"
-                        name="fname-column"
+                        name="firstName"
                       />
                     </div>
                   </div>
@@ -166,11 +174,12 @@ const Add = () => {
                         Last Name
                       </label>
                       <input
+                       {...register("lastName", { required: true })} 
                         type="text"
                         id="last-name-column"
                         className="form-control"
                         placeholder="Last Name"
-                        name="lname-column"
+                        name="lastName"
                       />
                     </div>
                   </div>
@@ -179,28 +188,30 @@ const Add = () => {
                       <label className="d-block form-label">Gender</label>
                       <div className="form-check my-50">
                         <input
+                          {...register("gender", { required: true })} 
                           type="radio"
-                          id="validationRadiojq1"
-                          name="validationRadiojq"
+                          id="gender"
+                          name="gender"
                           className="form-check-input"
                         />
                         <label
                           className="form-check-label"
-                          htmlFor="validationRadiojq1"
+                          htmlFor="gender"
                         >
                           Male
                         </label>
                       </div>
                       <div className="form-check">
                         <input
+                         {...register("gender", { required: true })} 
                           type="radio"
-                          id="validationRadiojq2"
-                          name="validationRadiojq"
+                          id="gender"
+                          name="gender"
                           className="form-check-input"
                         />
                         <label
                           className="form-check-label"
-                          htmlFor="validationRadiojq2"
+                          htmlFor="gender"
                         >
                           Female
                         </label>
@@ -213,11 +224,12 @@ const Add = () => {
                         Mobile
                       </label>
                       <input
+                       {...register("mobile", { required: true })} 
                         type="number"
                         id="city-column"
                         className="form-control"
                         placeholder="Mobile"
-                        name="city-column"
+                        name="mobile"
                       />
                     </div>
                   </div>
@@ -227,6 +239,7 @@ const Add = () => {
                         Username
                       </label>
                       <input
+                       {...register("username", { required: true })} 
                         type="text"
                         id="username"
                         className="form-control"
@@ -241,6 +254,7 @@ const Add = () => {
                         Password
                       </label>
                       <input
+                      {...register("password", { required: true })} 
                         type="Password"
                         id="password"
                         className="form-control"
@@ -254,7 +268,9 @@ const Add = () => {
                       <label className="form-label" htmlFor="selectDefault">
                         Membership Package
                       </label>
-                      <select className="form-select" id="selectDefault">
+                      <select
+                        {...register("_package", { required: true })} 
+                       className="form-select" id="selectDefault">
                         <option selected>Open this select menu</option>
                         <option value={1}>One</option>
                         <option value={2}>Two</option>
@@ -268,10 +284,11 @@ const Add = () => {
                         Valid From
                       </label>
                       <input
+                      {...register("_valid", { required: true })} 
                         type="date"
                         id="valid-from"
                         className="form-control"
-                        name="valid-from"
+                        name="_valid"
                       />
                     </div>
                   </div>
@@ -281,10 +298,11 @@ const Add = () => {
                         Valid to
                       </label>
                       <input
+                        {...register("valid_", { required: true })} 
                         type="date"
                         id="valid-to"
                         className="form-control"
-                        name="valid-to"
+                        name="valid_"
                       />
                     </div>
                   </div>
@@ -294,10 +312,11 @@ const Add = () => {
                         Payment Date
                       </label>
                       <input
+                      {...register("payDate", { required: true })} 
                         type="date"
                         id="valid-to"
                         className="form-control"
-                        name="valid-to"
+                        name="payDate"
                       />
                     </div>
                   </div>
@@ -307,6 +326,7 @@ const Add = () => {
                         Profile pic
                       </label>
                       <input
+                        {...register("image", { required: true })} 
                         className="form-control"
                         type="file"
                         id="customFile1"
@@ -321,7 +341,7 @@ const Add = () => {
                   </div>
                   <div className="col-12">
                     <button
-                      type="reset"
+                      type="submit"
                       className="btn btn-primary me-1 waves-effect waves-float waves-light"
                     >
                       Submit
@@ -346,3 +366,9 @@ const Add = () => {
 };
 
 export default Add;
+
+export const getServerSideProps = adminAuth(context => {
+  return {
+      props: {}
+  }
+})

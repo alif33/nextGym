@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, DollarSign, TrendingUp, User } from "react-feather";
 import AdminLayout from "../../src/components/AdminLayout/AdminLayout";
+import { adminAuth } from "../../__lib__/helpers/requireAuthentication";
 import badge from "/public/img/badge.svg";
 
 const Dashboard = () => {
@@ -230,3 +231,8 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+export const getServerSideProps = adminAuth(context => {
+  return {
+      props: {}
+  }
+})

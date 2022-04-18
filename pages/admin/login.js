@@ -1,12 +1,18 @@
 import { useRouter } from 'next/router';
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from 'react-hot-toast';
+import { useDispatch } from 'react-redux';
 import Cookies from 'universal-cookie';
+import { adminLogin } from './../../store/admins/actions';
 import { postData } from "./../../__lib__/helpers/HttpService";
 const Login = () => {
   const cookies = new Cookies()
+
+
   const [disable, setDisable] = useState(false);
   const [passShow, setPassShow] = useState("password");
+  const dispatch = useDispatch()
   const router = useRouter()
   const {
     register,
@@ -19,19 +25,17 @@ const Login = () => {
     setDisable(true);
     postData("admin/login", data, setDisable).then((res) => {
       if (res?.success) {
-        cookies.set(
-          "_info",
-          JSON.stringify({
+        cookies.set("_admin", JSON.stringify({
+          token: res.token,
+          admin: res.admin
+      }), { path: '/' });
+        toast.success('Login Success')
+        dispatch(adminLogin({
             token: res.token,
-            user: res.user,
-          }),
-          { path: "/admin/dashboard" }
-        );
-        reset();
-        router.push({
-          pathname: "/admin/dashboard",
-        });
-      }
+            admin: res.admin
+        }))
+        router.push("/admin/dashboard")
+    }
     });
   };
 

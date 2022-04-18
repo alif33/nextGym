@@ -1,6 +1,7 @@
 import React from "react";
 import AddProduct from "../../../src/components/AddProduct/AddProduct";
 import AdminLayout from "../../../src/components/AdminLayout/AdminLayout";
+import { adminAuth } from "../../../__lib__/helpers/requireAuthentication";
 
 const add = () => {
   return (
@@ -38,3 +39,9 @@ const add = () => {
 };
 
 export default add;
+
+export const getServerSideProps = adminAuth(context => {
+  return {
+      props: {}
+  }
+})
