@@ -4,7 +4,7 @@ import { toast } from 'react-hot-toast';
 import Cookies from "universal-cookie";
 import { authPost } from "./../../../__lib__/helpers/HttpService";
 
-const AddStaff = () => {
+const StaffField = () => {
   const cookies = new Cookies();
   const [disable, setDisable] = useState(false);
   const {
@@ -256,4 +256,4 @@ console.log(errors.firstName ? true: false)
   );
 };
 
-export default AddStaff;
+export default StaffField;

@@ -4,7 +4,7 @@ import SingleMember from "../../../../src/components/SingleMember/SingleMember";
 import { adminAuth } from "../../../../__lib__/helpers/requireAuthentication";
 import AdminLayout from "./../../../../src/components/AdminLayout/AdminLayout";
 
-const Member = ({memberId}) => {
+const MemberId = ({memberId}) => {
   return (
     <AdminLayout>
       <div className="content-header row">
@@ -48,7 +48,7 @@ const Member = ({memberId}) => {
   );
 };
 
-export default Member;
+export default MemberId;
 
 export const getServerSideProps = adminAuth(context => {
     const {memberId} = context.params
