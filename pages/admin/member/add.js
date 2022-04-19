@@ -15,10 +15,6 @@ const Add = () => {
     reset,
     formState: { errors },
   } = useForm();
-  const [image, setImage] = useState(null);
-  const handleImage = (e) => {
-    setImage(e.target.files[0]);
-  };
 
   const onSubmit = async (data) => {
     const formData = await new FormData();
@@ -37,13 +33,16 @@ const Add = () => {
   };
 
   const submitData = async (data) => {
+    setDisable(true)
     const admins = await cookies.get("_admin");
     authPost("/admin/member", data, admins.token).then((res) => {
       if (res.success) {
         toast.success(res.message);
         reset();
+        setDisable(false)
       } else {
         toast.error("Unsuccessfully");
+        setDisable(false)
       }
     });
   };
@@ -207,6 +206,11 @@ const Add = () => {
                             placeholder="First Name"
                             name="firstName"
                           />
+                          {errors.firstName && (
+                            <div className="text-danger">
+                              Please enter first name
+                            </div>
+                          )}
                         </div>
                       </div>
                       <div className="col-md-6 col-12">
@@ -225,6 +229,11 @@ const Add = () => {
                             placeholder="Last Name"
                             name="lastName"
                           />
+                          {errors.lastName && (
+                            <div className="text-danger">
+                              Please enter last name
+                            </div>
+                          )}
                         </div>
                       </div>
                       <div className="col-md-6 col-12">
@@ -247,7 +256,7 @@ const Add = () => {
                             <input
                               {...register("gender", { required: true })}
                               type="radio"
-                              id="femail"
+                              id="female"
                               name="gender"
                               value="FEMALE"
                               className="form-check-input"
@@ -259,6 +268,11 @@ const Add = () => {
                               Female
                             </label>
                           </div>
+                          {errors.gender && (
+                            <div className="text-danger">
+                              Please select gender
+                            </div>
+                          )}
                         </div>
                       </div>
                       <div className="col-md-6 col-12">
@@ -274,6 +288,11 @@ const Add = () => {
                             placeholder="Mobile"
                             name="mobile"
                           />
+                          {errors.mobile && (
+                            <div className="text-danger">
+                              Please enter mobile number
+                            </div>
+                          )}
                         </div>
                       </div>
                       <div className="col-md-6 col-12">
@@ -289,6 +308,11 @@ const Add = () => {
                             name="username"
                             placeholder="Username"
                           />
+                          {errors.username && (
+                            <div className="text-danger">
+                              Please enter username
+                            </div>
+                          )}
                         </div>
                       </div>
                       <div className="col-md-6 col-12">
@@ -307,6 +331,11 @@ const Add = () => {
                             name="password"
                             placeholder="Password"
                           />
+                          {errors.password && (
+                            <div className="text-danger">
+                              Please enter password
+                            </div>
+                          )}
                         </div>
                       </div>
                       <div className="col-md-6 col-12">
@@ -324,6 +353,11 @@ const Add = () => {
                             <option value={2}>Two</option>
                             <option value={3}>Three</option>
                           </select>
+                          {errors._package && (
+                            <div className="text-danger">
+                              Please select package
+                            </div>
+                          )}
                         </div>
                       </div>
                       <div className="col-md-6 col-12">
@@ -338,6 +372,11 @@ const Add = () => {
                             className="form-control"
                             name="_valid"
                           />
+                          {errors._valid && (
+                            <div className="text-danger">
+                              Please select start date
+                            </div>
+                          )}
                         </div>
                       </div>
                       <div className="col-md-6 col-12">
@@ -352,37 +391,30 @@ const Add = () => {
                             className="form-control"
                             name="valid_"
                           />
+                          {errors.valid_ && (
+                            <div className="text-danger">
+                              Please select expired date
+                            </div>
+                          )}
                         </div>
                       </div>
                       <div className="col-md-6 col-12">
-                        {/* <div className="mb-1">
-                          <label
-                            className="form-label"
-                            htmlFor="valid-to"
-                          ></label>
+                        <div className="mb-1">
+                          <label className="form-label" htmlFor="valid-to">
+                            Payment Date
+                          </label>
                           <input
+                            {...register("payDate", { required: true })}
                             type="date"
                             id="valid-to"
                             className="form-control"
                             name="payDate"
                           />
-                        </div> */}
-                        <div className="mb-1">
-                          <label className="form-label" htmlFor="bsDob">
-                            Payment Date
-                          </label>
-                          <input
-                            {...register("payDate", { required: true })}
-                            type="text"
-                            className="form-control picker flatpickr-input active"
-                            name="payDate"
-                            id="bsDob"
-                            
-                          />
-                          <div className="valid-feedback">Looks good!</div>
-                          <div className="invalid-feedback">
-                            Please enter your date of birth.
-                          </div>
+                          {errors.payDate && (
+                            <div className="text-danger">
+                              Please select payment date
+                            </div>
+                          )}
                         </div>
                       </div>
                       <div className="col-md-6 col-12">
@@ -395,8 +427,13 @@ const Add = () => {
                             className="form-control"
                             type="file"
                             id="customFile1"
-                            required
+                            
                           />
+                          {errors.image && (
+                            <div className="text-danger">
+                              Please select image
+                            </div>
+                          )}
                         </div>
                       </div>
                       {/* <div className="col-md-6 col-12">
@@ -405,12 +442,29 @@ const Add = () => {
                     </div>
                   </div> */}
                       <div className="col-12">
-                        <button
-                          type="submit"
-                          className="btn btn-primary me-1 waves-effect waves-float waves-light"
-                        >
-                          Submit
-                        </button>
+                        {disable ? (
+                          <button
+                            className="btn btn-outline-primary waves-effect"
+                            type="button"
+                            disabled
+                          >
+                            <span
+                              className="spinner-grow spinner-grow-sm"
+                              role="status"
+                              aria-hidden="true"
+                            />
+                            <span className="ms-25 align-middle">
+                              Loading...
+                            </span>
+                          </button>
+                        ) : (
+                          <button
+                            type="submit"
+                            className="btn btn-primary me-1 waves-effect waves-float waves-light"
+                          >
+                            Submit
+                          </button>
+                        )}
                         <button
                           type="reset"
                           className="btn btn-outline-secondary waves-effect"
