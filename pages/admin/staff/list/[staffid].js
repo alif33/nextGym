@@ -1,9 +1,10 @@
 import Link from "next/link";
 import React from "react";
+import AdminLayout from "../../../../src/components/AdminLayout/AdminLayout";
+import SingleStaffMember from "../../../../src/components/SingleStaffMember/SingleStaffMember";
 import { adminAuth } from "../../../../__lib__/helpers/requireAuthentication";
-import AdminLayout from "./../../../../src/components/AdminLayout/AdminLayout";
 
-const StaffId = ({ staffId }) => {
+const StaffToSingle = ({ staffId }) => {
   return (
     <AdminLayout>
       <div className="content-header row">
@@ -41,19 +42,19 @@ const StaffId = ({ staffId }) => {
         </div>
       </div>
       <div className="content-body">
-        <h1>Hello word</h1>
+        <SingleStaffMember staffId={staffId}/>
       </div>
     </AdminLayout>
   );
 };
 
-export default StaffId;
+export default StaffToSingle;
 
 export const getServerSideProps = adminAuth((context) => {
-  const { staffId } = context.params;
+  const {staffId} = context.params
   return {
     props: {
-      staffId,
+      staffId
     },
   };
 });
