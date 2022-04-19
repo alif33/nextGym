@@ -1,4 +1,7 @@
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import * as Icon from 'react-feather';
+
 
 const StaffTable = ({data}) => {
   const {image,position, firstName, lastName, salary} = data;
@@ -28,7 +31,7 @@ const StaffTable = ({data}) => {
             alt="Angular"
           />
         </td>
-        <td>{`${firstName} ${lastName}`}</td>
+        <td>{`${firstName} ${lastName}`} </td>
         <td>{position}</td>
         
         <td>
@@ -102,6 +105,13 @@ const StaffTable = ({data}) => {
             </div>
           </div>
         </td>
+        <td>
+         <Link href={`/admin/staff/list/${data._id}`}>
+         <a >
+         <Icon.Link/>
+         </a>
+         </Link>
+          </td>
       </tr>
     </>
   );

@@ -1,5 +1,6 @@
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
-
+import * as Icon from 'react-feather';
 const MemberTable = ({data}) => {
     const [toggle, setToggle] = useState(false)
     useEffect(() => {
@@ -26,7 +27,7 @@ const MemberTable = ({data}) => {
             alt="name"
           />
         </td>
-        <td>{`${data.firstName} ${data.lastName}`}</td>
+        <td><Link href={`/admin/member/list/${data._id}`}><a >{`${data.firstName} ${data.lastName}`}</a></Link></td>
         <td>{new Date(data._valid).toLocaleDateString()}</td>
         <td>{new Date(data.valid_).toLocaleDateString()}</td>
         <td>
@@ -98,6 +99,13 @@ const MemberTable = ({data}) => {
               </a>
             </div>
           </div>
+        </td>
+        <td>
+          <Link href={`/admin/member/list/${data._id}`}>
+          <a >
+            <Icon.Link/>
+          </a>
+          </Link>
         </td>
       </tr>
     </>

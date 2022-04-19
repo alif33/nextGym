@@ -26,6 +26,7 @@ const StaffList = () => {
                   <th>Status</th>
                   <th>Salary</th>
                   <th>Actions</th>
+                  <th>Link</th>
                 </tr>
               </thead>
               <tbody>

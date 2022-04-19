@@ -30,6 +30,7 @@ useEffect(()=>{
                   <th>Expired Date</th>
                   <th>Status</th>
                   <th>Actions</th>
+                  <th>Link</th>
                 </tr>
               </thead>
               <tbody>
