@@ -4,12 +4,12 @@ const memberSchema = new mongoose.Schema(
     {
         firstName: {
             type: String,
-            // required: true,
+            required: true,
             trim: true
         },
         lastName: {
             type: String,
-            // required: true,
+            required: true,
             trim: true
         },
         gender: {
@@ -18,12 +18,13 @@ const memberSchema = new mongoose.Schema(
         },
         mobile: {
             type: String,
-            // required: true,
+            required: true,
             trim: true
         },
         username: {
             type: String,
-            unique: true
+            unique: true,
+            required: true
         },
         password: {
             type: String, 
@@ -48,6 +49,10 @@ const memberSchema = new mongoose.Schema(
         image: {
             type: String,
             required: true
+        },
+        status: {
+            type: Boolean,
+            default: true
         }
 
     },

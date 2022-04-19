@@ -28,6 +28,7 @@
     "react-redux": "^7.2.6",
     "redux-persist": "^6.0.0",
     "sass": "^1.49.10",
+    "slugify": "^1.6.5",
     "streamifier": "^0.1.1",
     "universal-cookie": "^4.0.4"
   },
