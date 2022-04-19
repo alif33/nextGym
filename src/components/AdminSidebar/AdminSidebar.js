@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { Disc, X } from "react-feather";
+import MenuList from "./MenuList";
 import { menuItem } from "./sideMenu";
 
 const AdminSidebar = ({ toggle, setToggle }) => {
@@ -143,54 +144,9 @@ const AdminSidebar = ({ toggle, setToggle }) => {
           id="main-menu-navigation"
           data-menu="menu-navigation"
         >
-          {menuItem.map((item, i) => (
-            <li
-              key={i}
-              className={`nav-item} ${
-                item.children?.length > 0 ? "has-sub open" : ""
-              }`}
-              style={item.children?.length > 0 ? customStyle : undefined}
-            >
-              <a
-                onClick={ () => {
-                 
-                 
-                }}
-
-               
-                className="d-flex align-items-center"
-                href={item.url}
-              >
-                {item.icon}
-                <span
-                  className="menu-title text-truncate"
-                  data-i18n="Dashboards"
-                >
-                  {item.title}
-                </span>
-              </a>
-              {item.children?.length > 0 && (
-                <ul className="menu-content">
-                  {item.children?.map((children, index) => (
-                    <li key={index}>
-                      <a
-                        className="d-flex align-items-center"
-                        href={children.url}
-                      >
-                        {children.icon}
-                        <span
-                          className="menu-item text-truncate"
-                          data-i18n="List"
-                        >
-                          {children.title}
-                        </span>
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </li>
-          ))}
+          {menuItem.map((item, i) => <MenuList key={i} item={item}/>)}
+           
+        
         </ul>
       </div>
     </div>

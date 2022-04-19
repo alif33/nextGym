@@ -6,7 +6,7 @@ export const menuItem = [
     {id: 1,
      url: '/admin/dashboard',
      title: 'Dashboard',
-     short: 'dashboard',
+     height: '',
      icon: <Home/>,
      children:[
          
@@ -15,7 +15,7 @@ export const menuItem = [
     {id: 2,
       url: '#',
       title: 'Members',
-      short: 'members',
+      size: '140px',
       icon: <FileText/>,
       children: [
           {id: 1,
@@ -33,7 +33,7 @@ export const menuItem = [
      {id: 3,
       url: '#',
       title: 'Staff Members',
-      short: 'staff',
+      size: '140px',
       icon: <FileText/>,
       children: [
           {id: 1,
@@ -51,7 +51,7 @@ export const menuItem = [
      {id: 10,
       url: '#',
       title: 'Class Schedule ',
-      short: 'schedule',
+      size: '140px',
       icon: <FileText/>,
       children: [
           {id: 1,
@@ -69,7 +69,7 @@ export const menuItem = [
      {id: 11,
       url: '#',
       title: 'Product',
-      short: 'product',
+      size: '140px',
       icon: <FileText/>,
       children: [
           {id: 1,
@@ -85,9 +85,9 @@ export const menuItem = [
       ]
      },
     {id: 4,
-     url: '/admin/todo',
+     url: '#',
      title: 'POS',
-     short: 'pos',
+     size: '100px',
      icon: <CheckSquare/>,
      children: [
       {id: 1,
@@ -101,7 +101,7 @@ export const menuItem = [
     {id: 7,
      url: '#',
      title: 'Nutriation/Diet',
-     short: 'nutiration/diet',
+     size: '211px',
      icon: <FileText/>,
      children: [
          {id: 1,

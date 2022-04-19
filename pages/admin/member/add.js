@@ -2,23 +2,23 @@ import React, { useState } from "react";
 import Barcode from "react-barcode";
 import { useForm } from "react-hook-form";
 import AdminLayout from "../../../src/components/AdminLayout/AdminLayout";
-import { postData } from "../../../__lib__/helpers/HttpService";
 import { adminAuth } from "../../../__lib__/helpers/requireAuthentication";
+import { postData } from './../../../__lib__/helpers/HttpService';
 
 const Add = () => {
   const [disable, setDisable] = useState(false)
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
-  const {image, setImage} = useState([]);
+  const [image, setImage] = useState(null);
   const handleImage = (e) => {
-    console.log(e)
+    setImage(e.target.files[0])
   }
 
   const onSubmit = data => {
-    console.log(data)
+    const newData = {...data, image: image}
+    console.log(newData)
     setDisable(true)
-    if (watch.image.length) {
-      const newData = {...data, image: image[0]}
-      postData('/admin/member', data, setDisable)
+    if (image !== null) {
+      postData('/admin/member', newData, setDisable)
       .then(res => {
         console.log(res)
       })
@@ -210,7 +210,7 @@ const Add = () => {
                           type="radio"
                           id="male"
                           name="gender"
-                          value="male"
+                          value="Male"
                           className="form-check-input"
                         />
                         <label
@@ -226,7 +226,7 @@ const Add = () => {
                           type="radio"
                           id="femail"
                           name="gender"
-                          value="femail"
+                          value="Female"
                           className="form-check-input"
                         />
                         <label
