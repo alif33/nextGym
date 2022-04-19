@@ -1,5 +1,4 @@
 import React from "react";
-import Barcode from "react-barcode";
 
 const AddProduct = () => {
   return (
@@ -156,7 +155,7 @@ const AddProduct = () => {
                       />
                     </div>
                   </div>
-                  <div className="col-md-6 col-12">
+                  {/* <div className="col-md-6 col-12">
                     <div className="mb-1">
                       <label className="form-label" htmlFor="company-column">
                         Unique ID
@@ -165,7 +164,7 @@ const AddProduct = () => {
                         <Barcode width={2} height={80} value="FSFDS56454FDF4" />
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                   <div className="col-12">
                     <button
                       type="submit"

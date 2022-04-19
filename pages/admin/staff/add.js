@@ -1,4 +1,5 @@
 import React from "react";
+import { Toaster } from "react-hot-toast";
 import AddStaff from "../../../src/components/AddStaff/AddStaff";
 import AdminLayout from "../../../src/components/AdminLayout/AdminLayout";
 import { adminAuth } from "../../../__lib__/helpers/requireAuthentication";
@@ -6,6 +7,7 @@ import { adminAuth } from "../../../__lib__/helpers/requireAuthentication";
 const add = () => {
   return (
     <AdminLayout>
+        <Toaster position="top-center" reverseOrder={false} />
       <div className="content-header row">
         {/* path */}
         <div className="content-header-left col-md-9 col-12 mb-2">

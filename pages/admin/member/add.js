@@ -1,40 +1,61 @@
 import React, { useState } from "react";
-import Barcode from "react-barcode";
 import { useForm } from "react-hook-form";
+import { toast, Toaster } from "react-hot-toast";
+import Cookies from "universal-cookie";
 import AdminLayout from "../../../src/components/AdminLayout/AdminLayout";
 import { adminAuth } from "../../../__lib__/helpers/requireAuthentication";
-import { postData } from './../../../__lib__/helpers/HttpService';
-
+import { authPost } from "./../../../__lib__/helpers/HttpService";
 const Add = () => {
-  const [disable, setDisable] = useState(false)
-  const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  const cookies = new Cookies();
+  const [disable, setDisable] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    watch,
+    reset,
+    formState: { errors },
+  } = useForm();
   const [image, setImage] = useState(null);
   const handleImage = (e) => {
-    setImage(e.target.files[0])
-  }
-
-  const onSubmit = data => {
-    const newData = {...data, image: image}
-    console.log(newData)
-    setDisable(true)
-    if (image !== null) {
-      postData('/admin/member', newData, setDisable)
-      .then(res => {
-        console.log(res)
-      })
-    }
+    setImage(e.target.files[0]);
   };
-  
-  
+
+  const onSubmit = async (data) => {
+    const formData = await new FormData();
+    formData.append("firstName", data.firstName);
+    formData.append("lastName", data.lastName);
+    formData.append("gender", data.gender);
+    formData.append("mobile", data.mobile);
+    formData.append("username", data.username);
+    formData.append("password", data.password);
+    formData.append("_package", data._package);
+    formData.append("_valid", data._valid);
+    formData.append("valid_", data.valid_);
+    formData.append("payDate", data.payDate);
+    formData.append("image", data.image[0]);
+    await submitData(formData);
+  };
+
+  const submitData = async (data) => {
+    const admins = await cookies.get("_admin");
+    authPost("/admin/member", data, admins.token).then((res) => {
+      if (res.success) {
+        toast.success(res.message);
+        reset();
+      } else {
+        toast.error("Unsuccessfully");
+      }
+    });
+  };
+
   return (
     <AdminLayout>
+      <Toaster position="top-center" reverseOrder={false} />
       <div className="content-header row">
         <div className="content-header-left col-md-9 col-12 mb-2">
           <div className="row breadcrumbs-top">
             <div className="col-12">
-              <h2 className="content-header-title float-start mb-0">
-               Members
-              </h2>
+              <h2 className="content-header-title float-start mb-0">Members</h2>
               <div className="breadcrumb-wrapper">
                 <ol className="breadcrumb">
                   <li className="breadcrumb-item">
@@ -161,225 +182,249 @@ const Add = () => {
       <div className="content-body">
         {/* <MemberAdd/> */}
         <section id="multiple-column-form">
-      <div className="row">
-        <div className="col-12">
-          <div className="card">
-            <div className="card-header">
-              <h4 className="card-title">Add Member</h4>
-            </div>
-            <div className="card-body">
-
-              <form onSubmit={handleSubmit(onSubmit)} className="form">
-                <div className="row">
-                  <div className="col-md-6 col-12">
-                    <div className="mb-1">
-                      <label className="form-label" htmlFor="first-name-column">
-                        First Name
-                      </label>
-                      <input
-                      {...register("firstName", { required: true })} 
-                        type="text"
-                        id="first-name-column"
-                        className="form-control"
-                        placeholder="First Name"
-                        name="firstName"
-                      />
-                    </div>
-                  </div>
-                  <div className="col-md-6 col-12">
-                    <div className="mb-1">
-                      <label className="form-label" htmlFor="last-name-column">
-                        Last Name
-                      </label>
-                      <input
-                       {...register("lastName", { required: true })} 
-                        type="text"
-                        id="last-name-column"
-                        className="form-control"
-                        placeholder="Last Name"
-                        name="lastName"
-                      />
-                    </div>
-                  </div>
-                  <div className="col-md-6 col-12">
-                    <div className="mb-1">
-                      <label className="d-block form-label">Gender</label>
-                      <div className="form-check my-50">
-                        <input
-                          {...register("gender", { required: true })} 
-                          type="radio"
-                          id="male"
-                          name="gender"
-                          value="Male"
-                          className="form-check-input"
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor="male"
-                        >
-                          Male
-                        </label>
+          <div className="row">
+            <div className="col-12">
+              <div className="card">
+                <div className="card-header">
+                  <h4 className="card-title">Add Member</h4>
+                </div>
+                <div className="card-body">
+                  <form onSubmit={handleSubmit(onSubmit)} className="form">
+                    <div className="row">
+                      <div className="col-md-6 col-12">
+                        <div className="mb-1">
+                          <label
+                            className="form-label"
+                            htmlFor="first-name-column"
+                          >
+                            First Name
+                          </label>
+                          <input
+                            {...register("firstName", { required: true })}
+                            type="text"
+                            id="first-name-column"
+                            className="form-control"
+                            placeholder="First Name"
+                            name="firstName"
+                          />
+                        </div>
                       </div>
-                      <div className="form-check">
-                        <input
-                         {...register("gender", { required: true })} 
-                          type="radio"
-                          id="femail"
-                          name="gender"
-                          value="Female"
-                          className="form-check-input"
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor="female"
-                        >
-                          Female
-                        </label>
+                      <div className="col-md-6 col-12">
+                        <div className="mb-1">
+                          <label
+                            className="form-label"
+                            htmlFor="last-name-column"
+                          >
+                            Last Name
+                          </label>
+                          <input
+                            {...register("lastName", { required: true })}
+                            type="text"
+                            id="last-name-column"
+                            className="form-control"
+                            placeholder="Last Name"
+                            name="lastName"
+                          />
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                  <div className="col-md-6 col-12">
-                    <div className="mb-1">
-                      <label className="form-label" htmlFor="city-column">
-                        Mobile
-                      </label>
-                      <input
-                       {...register("mobile", { required: true })} 
-                        type="number"
-                        id="city-column"
-                        className="form-control"
-                        placeholder="Mobile"
-                        name="mobile"
-                      />
-                    </div>
-                  </div>
-                  <div className="col-md-6 col-12">
-                    <div className="mb-1">
-                      <label className="form-label" htmlFor="username">
-                        Username
-                      </label>
-                      <input
-                       {...register("username", { required: true })} 
-                        type="text"
-                        id="username"
-                        className="form-control"
-                        name="username"
-                        placeholder="Username"
-                      />
-                    </div>
-                  </div>
-                  <div className="col-md-6 col-12">
-                    <div className="mb-1">
-                      <label className="form-label" htmlFor="company-column">
-                        Password
-                      </label>
-                      <input
-                      {...register("password", { required: true })} 
-                        type="Password"
-                        id="password"
-                        className="form-control"
-                        name="password"
-                        placeholder="Password"
-                      />
-                    </div>
-                  </div>
-                  <div className="col-md-6 col-12">
-                    <div className="mb-1">
-                      <label className="form-label" htmlFor="selectDefault">
-                        Membership Package
-                      </label>
-                      <select
-                        {...register("_package", { required: true })} 
-                       className="form-select" id="selectDefault">
-                        <option selected>Open this select menu</option>
-                        <option value={1}>One</option>
-                        <option value={2}>Two</option>
-                        <option value={3}>Three</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div className="col-md-6 col-12">
-                    <div className="mb-1">
-                      <label className="form-label" htmlFor="valid-from">
-                        Valid From
-                      </label>
-                      <input
-                      {...register("_valid", { required: true })} 
-                        type="date"
-                        id="valid-from"
-                        className="form-control"
-                        name="_valid"
-                      />
-                    </div>
-                  </div>
-                  <div className="col-md-6 col-12">
-                    <div className="mb-1">
-                      <label className="form-label" htmlFor="valid-to">
-                        Valid to
-                      </label>
-                      <input
-                        {...register("valid_", { required: true })} 
-                        type="date"
-                        id="valid-to"
-                        className="form-control"
-                        name="valid_"
-                      />
-                    </div>
-                  </div>
-                  <div className="col-md-6 col-12">
-                    <div className="mb-1">
-                      <label className="form-label" htmlFor="valid-to">
-                        Payment Date
-                      </label>
-                      <input
-                      {...register("payDate", { required: true })} 
-                        type="date"
-                        id="valid-to"
-                        className="form-control"
-                        name="payDate"
-                      />
-                    </div>
-                  </div>
-                  <div className="col-md-6 col-12">
-                    <div className="mb-1">
-                      <label htmlFor="customFile1" className="form-label">
-                        Profile pic
-                      </label>
-                      <input
-                        onChange={(e) => handleImage(e)}
-                        className="form-control"
-                        type="file"
-                        id="customFile1"
-                        required
-                      />
-                    </div>
-                  </div>
-                  <div className="col-md-6 col-12">
+                      <div className="col-md-6 col-12">
+                        <div className="mb-1">
+                          <label className="d-block form-label">Gender</label>
+                          <div className="form-check my-50">
+                            <input
+                              {...register("gender", { required: true })}
+                              type="radio"
+                              id="male"
+                              name="gender"
+                              value="MALE"
+                              className="form-check-input"
+                            />
+                            <label className="form-check-label" htmlFor="male">
+                              Male
+                            </label>
+                          </div>
+                          <div className="form-check">
+                            <input
+                              {...register("gender", { required: true })}
+                              type="radio"
+                              id="femail"
+                              name="gender"
+                              value="FEMALE"
+                              className="form-check-input"
+                            />
+                            <label
+                              className="form-check-label"
+                              htmlFor="female"
+                            >
+                              Female
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="col-md-6 col-12">
+                        <div className="mb-1">
+                          <label className="form-label" htmlFor="city-column">
+                            Mobile
+                          </label>
+                          <input
+                            {...register("mobile", { required: true })}
+                            type="number"
+                            id="city-column"
+                            className="form-control"
+                            placeholder="Mobile"
+                            name="mobile"
+                          />
+                        </div>
+                      </div>
+                      <div className="col-md-6 col-12">
+                        <div className="mb-1">
+                          <label className="form-label" htmlFor="username">
+                            Username
+                          </label>
+                          <input
+                            {...register("username", { required: true })}
+                            type="text"
+                            id="username"
+                            className="form-control"
+                            name="username"
+                            placeholder="Username"
+                          />
+                        </div>
+                      </div>
+                      <div className="col-md-6 col-12">
+                        <div className="mb-1">
+                          <label
+                            className="form-label"
+                            htmlFor="company-column"
+                          >
+                            Password
+                          </label>
+                          <input
+                            {...register("password", { required: true })}
+                            type="Password"
+                            id="password"
+                            className="form-control"
+                            name="password"
+                            placeholder="Password"
+                          />
+                        </div>
+                      </div>
+                      <div className="col-md-6 col-12">
+                        <div className="mb-1">
+                          <label className="form-label" htmlFor="selectDefault">
+                            Membership Package
+                          </label>
+                          <select
+                            {...register("_package", { required: true })}
+                            className="form-select"
+                            id="selectDefault"
+                          >
+                            <option selected>Open this select menu</option>
+                            <option value={1}>One</option>
+                            <option value={2}>Two</option>
+                            <option value={3}>Three</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div className="col-md-6 col-12">
+                        <div className="mb-1">
+                          <label className="form-label" htmlFor="valid-from">
+                            Valid From
+                          </label>
+                          <input
+                            {...register("_valid", { required: true })}
+                            type="date"
+                            id="valid-from"
+                            className="form-control"
+                            name="_valid"
+                          />
+                        </div>
+                      </div>
+                      <div className="col-md-6 col-12">
+                        <div className="mb-1">
+                          <label className="form-label" htmlFor="valid-to">
+                            Valid to
+                          </label>
+                          <input
+                            {...register("valid_", { required: true })}
+                            type="date"
+                            id="valid-to"
+                            className="form-control"
+                            name="valid_"
+                          />
+                        </div>
+                      </div>
+                      <div className="col-md-6 col-12">
+                        {/* <div className="mb-1">
+                          <label
+                            className="form-label"
+                            htmlFor="valid-to"
+                          ></label>
+                          <input
+                            type="date"
+                            id="valid-to"
+                            className="form-control"
+                            name="payDate"
+                          />
+                        </div> */}
+                        <div className="mb-1">
+                          <label className="form-label" htmlFor="bsDob">
+                            Payment Date
+                          </label>
+                          <input
+                            {...register("payDate", { required: true })}
+                            type="text"
+                            className="form-control picker flatpickr-input active"
+                            name="payDate"
+                            id="bsDob"
+                            
+                          />
+                          <div className="valid-feedback">Looks good!</div>
+                          <div className="invalid-feedback">
+                            Please enter your date of birth.
+                          </div>
+                        </div>
+                      </div>
+                      <div className="col-md-6 col-12">
+                        <div className="mb-1">
+                          <label htmlFor="customFile1" className="form-label">
+                            Profile pic
+                          </label>
+                          <input
+                            {...register("image", { required: true })}
+                            className="form-control"
+                            type="file"
+                            id="customFile1"
+                            required
+                          />
+                        </div>
+                      </div>
+                      {/* <div className="col-md-6 col-12">
                     <div className="mb-1">
                       <Barcode width={2} height={80} value="FSFDS56454FDF4" />,
                     </div>
-                  </div>
-                  <div className="col-12">
-                    <button
-                      type="submit"
-                      className="btn btn-primary me-1 waves-effect waves-float waves-light"
-                    >
-                      Submit
-                    </button>
-                    <button
-                      type="reset"
-                      className="btn btn-outline-secondary waves-effect"
-                    >
-                      Reset
-                    </button>
-                  </div>
+                  </div> */}
+                      <div className="col-12">
+                        <button
+                          type="submit"
+                          className="btn btn-primary me-1 waves-effect waves-float waves-light"
+                        >
+                          Submit
+                        </button>
+                        <button
+                          type="reset"
+                          className="btn btn-outline-secondary waves-effect"
+                        >
+                          Reset
+                        </button>
+                      </div>
+                    </div>
+                  </form>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
+        </section>
       </div>
     </AdminLayout>
   );
@@ -387,8 +432,8 @@ const Add = () => {
 
 export default Add;
 
-export const getServerSideProps = adminAuth(context => {
+export const getServerSideProps = adminAuth((context) => {
   return {
-      props: {}
-  }
-})
+    props: {},
+  };
+});
