@@ -1,5 +1,4 @@
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Disc, X } from "react-feather";
 import MenuList from "./MenuList";
 import { menuItem } from "./sideMenu";
@@ -128,8 +127,8 @@ const AdminSidebar = ({ toggle, setToggle }) => {
           </li>
         </ul>
       </div>
-      <div className="shadow-bottom" />
-      <div className="main-menu-content">
+      <div className="shadow-bottom" style={{display: 'block'}}/>
+      <div className="main-menu-content ps ps--active-y ps--scrolling-y" style={{overflowY: 'scroll'}}>
         <ul
           className="navigation navigation-main"
           id="main-menu-navigation"
