@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import Cookies from "universal-cookie";
-import { authPost } from "./../../../__lib__/helpers/HttpService";
+import CategoryModal from "../CategoryModal/CategoryModal";
+import { authPost, getData } from "./../../../__lib__/helpers/HttpService";
 
 const AddProduct = () => {
+  const [trigger, setTrigger] = useState(false);
   const cookies = new Cookies();
   const [disable, setDisable] = useState(false);
   const {
@@ -44,8 +46,15 @@ const AddProduct = () => {
     });
   };
 
+  const [categories, setCategories] = useState([])
+  useEffect(() => {
+    getData('/admin/categories')
+    .then(data => setCategories(data))
+  }, [])
+
   return (
     <section id="multiple-column-form">
+      {trigger && <CategoryModal trigger={trigger} setTrigger={setTrigger}/>}
       <div className="row">
         <div className="col-12">
           <div className="card">
@@ -193,25 +202,35 @@ const AddProduct = () => {
                   </div>
 
                   <div className="col-md-6 col-12">
-                    <div className="mb-1">
-                      <label className="form-label" htmlFor="selectDefault">
-                        Category
-                      </label>
-                      <select
-                        {...register("category", { required: true })}
-                        name="category"
-                        className="form-select"
-                        id="selectDefault"
-                      >
-                        <option selected>Select Category</option>
-                        <option value={1}>One</option>
-                        <option value={2}>Two</option>
-                        <option value={3}>Three</option>
-                      </select>
-                      {errors.category && (
-                        <div className="text-danger">Please enter category</div>
-                      )}
+                    <label className="form-label" htmlFor="selectDefault">
+                      Category
+                    </label>
+                    <div className="d-flex align-items-center">
+                      <div>
+                        <select
+                          {...register("category", { required: true })}
+                          name="category"
+                          className="form-select"
+                          id="selectDefault"
+                        >
+                          <option selected>Select Category</option>
+                        {categories.map((cate, i) =>   <option key={i} value={i+1}>{cate.categoryName}</option>)}
+                     
+                        </select>
+                      </div>
+                      <div className="ms-1">
+                        <span
+                          onClick={() => setTrigger(true)}
+                          type="button"
+                          className="btn btn-primary"
+                        >
+                          Add
+                        </span>
+                      </div>
                     </div>
+                    {errors.category && (
+                      <div className="text-danger">Please enter category</div>
+                    )}
                   </div>
                   <div className="col-md-6 col-12">
                     <div className="mb-1">
@@ -243,7 +262,7 @@ const AddProduct = () => {
                         name="description"
                         rows={4}
                       />
-                      {errors.image && (
+                      {errors.description && (
                         <div className="text-danger">Please select image</div>
                       )}
                     </div>
