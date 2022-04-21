@@ -29,6 +29,7 @@ const CategoryModal = ({trigger,setTrigger}) => {
         setDisable(false);
       } else {
         setDisable(false);
+        toast.error(res.message)
       }
     });
   }

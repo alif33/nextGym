@@ -7,4 +7,5 @@ export const rootReducer = combineReducers({
     users: userSlice.reducer,
     admins: adminSlice.reducer,
     members: memberSlice.reducer,
+    
 })

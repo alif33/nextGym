@@ -2086,6 +2086,13 @@ react-barcode@^1.4.1:
     jsbarcode "^3.8.0"
     prop-types "^15.6.2"
 
+react-countdown@^2.3.2:
+  version "2.3.2"
+  resolved "https://registry.npmjs.org/react-countdown/-/react-countdown-2.3.2.tgz#4cc27f28f2dcd47237ee66e4b9f6d2a21fc0b0ad"
+  integrity sha512-Q4SADotHtgOxNWhDdvgupmKVL0pMB9DvoFcxv5AzjsxVhzOVxnttMbAywgqeOdruwEAmnPhOhNv/awAgkwru2w==
+  dependencies:
+    prop-types "^15.7.2"
+
 react-dom@18.0.0:
   version "18.0.0"
   resolved "https://registry.npmjs.org/react-dom/-/react-dom-18.0.0.tgz"

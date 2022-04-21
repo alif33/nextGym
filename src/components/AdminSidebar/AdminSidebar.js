@@ -5,10 +5,8 @@ import MenuList from "./MenuList";
 import { menuItem } from "./sideMenu";
 
 const AdminSidebar = ({ toggle, setToggle }) => {
-  const [subOpen, setSubOpen] = useState({});
-   
- 
 
+   
   useEffect(() => {
     // const closeSidebar = (e) => {
     //   console.log(e)
@@ -20,13 +18,6 @@ const AdminSidebar = ({ toggle, setToggle }) => {
     // return () => document.body.removeEventListener("click", closeSidebar);
   }, []);
 
-  const {pathname} = useRouter();
-  
-  const customStyle = {
-    overflow: "hidden",
-    transition: "all 0.3s",
-    height: `${subOpen ? "auto" : "43px"}`,
-  };
 
   return (
     <div

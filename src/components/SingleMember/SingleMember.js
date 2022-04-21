@@ -1,126 +1,109 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { getData } from './../../../__lib__/helpers/HttpService';
 
-const SingleMember = () => {
+const SingleMember = ({memberId}) => {
   const [toggle, setToggle] = useState(false);
+  const [member, setMember] = useState({})
+
+
+  useEffect(()=> {
+    getData(`/admin/member/${memberId}`)
+    .then(data => setMember(data))
+  }, [memberId])
 
   return (
-    <section className="app-ecommerce-details">
-      <div className="card">
-        <div className="card-body">
-          <div className="row my-2">
-            <div className="col-12 col-md-5 d-flex align-items-center justify-content-center mb-2 mb-md-0">
-              <div className="d-flex align-items-center justify-content-center">
-                <img
-                  src="https://cdn.corporatefinanceinstitute.com/assets/product-mix3.jpeg"
-                  className="img-fluid product-img"
-                  alt="product image"
-                />
+    <section className="app-user-view-account">
+      <div className="row">
+
+      <div className="col-xl-4 col-lg-5 col-md-5 order-1 order-md-0">
+        {/* User Card */}
+        <div className="card">
+          <div className="card-body">
+            <div className="user-avatar-section">
+              <div className="d-flex align-items-center flex-column">
+                <img className="img-fluid rounded mt-3 mb-2" src={member.image} height={110} width={110} alt="User avatar" />
+                <div className="user-info text-center">
+                  <h4>{member.firstName + ' ' + member.lastName}</h4>
+                  <span className="badge bg-light-secondary">General Member</span>
+                </div>
               </div>
             </div>
-            <div className="col-12 col-md-7">
-              <div className="row">
-                <div className="col-md-11 mx-auto ">
-                  <div className="row border-primary  rounded pt-1 px-1  mb-1">
-                    <p className="col-md-3 ">Name</p>
-                    <p className=" col-md-9">Abubokor Siddik</p>
-                  </div>
-                  <div className="row border-primary  rounded pt-1 px-1 mb-1">
-                    <p className="col-md-3 ">Gender</p>
-                    <p className=" col-md-9">Male</p>
-                  </div>
-                  <div className="row border-primary  rounded pt-1 px-1 mb-1">
-                    <p className="col-md-3 ">Mobile</p>
-                    <p className=" col-md-9">01621675233</p>
-                  </div>
-                  <div className="row border-primary  rounded pt-1 px-1 mb-1">
-                    <p className="col-md-3 ">Username</p>
-                    <p className=" col-md-9">admin</p>
-                  </div>
-                  <div className="row border-primary  rounded pt-1 px-1 mb-1">
-                    <p className="col-md-3 ">Password</p>
-                    <p className=" col-md-9">password</p>
-                  </div>
-                  <div className="row border-primary  rounded pt-1 px-1 mb-1">
-                    <p className="col-md-3 ">Ship Package</p>
-                    <p className=" col-md-9">One</p>
-                  </div>
-                  <div className="row border-primary  rounded pt-1 px-1 mb-1">
-                    <p className="col-md-3 ">Valid Form</p>
-                    <p className=" col-md-9">
-                      {new Date().toLocaleDateString()}
-                    </p>
-                  </div>
-                  <div className="row border-primary  rounded pt-1 px-1 mb-1">
-                    <p className="col-md-3 ">Valid To</p>
-                    <p className=" col-md-9">
-                      {new Date().toLocaleDateString()}
-                    </p>
-                  </div>
-                  <div className="row border-primary  rounded pt-1 px-1 mb-1">
-                    <p className="col-md-3 ">Payment Date</p>
-                    <p className=" col-md-9">
-                      {new Date().toLocaleDateString()}
-                    </p>
-                  </div>
-                  <div className="row border-primary  rounded pt-1 px-1 mb-1">
-                    <p className="col-md-3 ">Status</p>
-                    <div className="col-md-9">
-                      <div className="d-flex">
-                        <p className="text-success">Active</p>
-                        {/* <p className="text-warning">Inactive</p> */}
-                        <div className="dropdown mx-2">
-                          <button
-                            onClick={() => setToggle(!toggle)}
-                            type="button"
-                            className={`btn btn-sm dropdown-toggle hide-arrow py-0 waves-effect waves-float waves-light ${
-                              toggle ? "show" : ""
-                            }`}
-                            data-bs-toggle="dropdown"
-                          >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width={14}
-                              height={14}
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth={2}
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              className="feather feather-more-vertical"
-                            >
-                              <circle cx={12} cy={12} r={1} />
-                              <circle cx={12} cy={5} r={1} />
-                              <circle cx={12} cy={19} r={1} />
-                            </svg>
-                          </button>
-                          <div
-                            className={`dropdown-menu dropdown-menu-end ${
-                              toggle ? "show" : ""
-                            }`}
-                            style={
-                              toggle
-                                ? {
-                                    position: "absolute",
-                                    inset: "0px auto auto 0px",
-                                    margin: "0px",
-                                    transform: "translate(-93px, 14px)",
-                                  }
-                                : {}
-                            }
-                          >
-                            <span className="dropdown-item">Active</span>
-                            <span className="dropdown-item">Inactive</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+            <div className="d-flex justify-content-around my-2 pt-75">
+              <div className="d-flex align-items-start me-2">
+                <span className="badge bg-light-primary p-75 rounded">
+                  <svg xmlns="http://www.w3.org/2000/svg" width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="feather feather-check font-medium-2"><polyline points="20 6 9 17 4 12" /></svg>
+                </span>
+                <div className="ms-75">
+                  <h4 className="mb-0">1.23k</h4>
+                  <small>Tasks Done</small>
                 </div>
+              </div>
+              <div className="d-flex align-items-start">
+                <span className="badge bg-light-primary p-75 rounded">
+                  <svg xmlns="http://www.w3.org/2000/svg" width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="feather feather-briefcase font-medium-2"><rect x={2} y={7} width={20} height={14} rx={2} ry={2} /><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" /></svg>
+                </span>
+                <div className="ms-75">
+                  <h4 className="mb-0">568</h4>
+                  <small>Projects Done</small>
+                </div>
+              </div>
+            </div>
+            <h4 className="fw-bolder border-bottom pb-50 mb-1">Details</h4>
+            <div className="info-container">
+              <ul className="list-unstyled">
+                <li className="mb-75">
+                  <span className="fw-bolder me-25">Username:</span>
+                  <span>{member.username?.split('@')[0]}</span>
+                </li>
+                <li className="mb-75">
+                  <span className="fw-bolder me-25">Email:</span>
+                  <span>{member.username}</span>
+                </li>
+                <li className="mb-75">
+                  <span className="fw-bolder me-25">Gender:</span>
+                  <span>{member.gender}</span>
+                </li>
+                <li className="mb-75">
+                  <span className="fw-bolder me-25">Status:</span>
+                  {member.status ? <span className="badge bg-light-success">Active</span>:
+                    <span className="badge bg-light-danger">Inactive</span>
+                  }
+                </li>
+                <li className="mb-75">
+                  <span className="fw-bolder me-25">Role:</span>
+                  <span>member</span>
+                </li>
+                <li className="mb-75">
+                  <span className="fw-bolder me-25">Mobile:</span>
+                  <span>{member.mobile}</span>
+                </li>
+                <li className="mb-75">
+                  <span className="fw-bolder me-25">Payment Date:</span>
+                  <span>{new Date (member.payDate).toLocaleDateString()}</span>
+                </li>
+               
+                <li className="mb-75">
+                  <span className="fw-bolder me-25">Validation Started</span>
+                  <span>{new Date(member._valid).toLocaleDateString()}</span>
+                </li>
+                <li className="mb-75">
+                  <span className="fw-bolder me-25">Validation ending</span>
+                  <span>{new Date(member.valid_).toLocaleDateString()}</span>
+                </li>
+                  
+              </ul>
+              <div className="d-flex justify-content-center pt-2">
+                <a href="javascript:;" className="btn btn-primary me-1 waves-effect waves-float waves-light" data-bs-target="#editUser" data-bs-toggle="modal">
+                  Edit
+                </a>
+                <a href="javascript:;" className="btn btn-outline-danger suspend-user waves-effect">Inactive</a>
               </div>
             </div>
           </div>
         </div>
+        {/* /User Card */}
+
+      </div>
       </div>
     </section>
   );

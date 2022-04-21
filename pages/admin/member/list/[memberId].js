@@ -42,7 +42,7 @@ const MemberId = ({memberId}) => {
         </div>
       </div>
       <div className="content-body">
-         <SingleMember/>
+         <SingleMember memberId={memberId}/>
       </div>
     </AdminLayout>
   );

@@ -207,7 +207,7 @@ const AddProduct = () => {
                     </label>
                     <div className="d-flex align-items-center">
                       <div>
-                        <select
+                        {categories.length> 0 ? <select
                           {...register("category", { required: true })}
                           name="category"
                           className="form-select"
@@ -216,7 +216,7 @@ const AddProduct = () => {
                           <option selected>Select Category</option>
                         {categories.map((cate, i) =>   <option key={i} value={i+1}>{cate.categoryName}</option>)}
                      
-                        </select>
+                        </select> : <span>Loading...</span>}
                       </div>
                       <div className="ms-1">
                         <span
