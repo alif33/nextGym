@@ -14,7 +14,6 @@ handler.get(async (req, res) => {
 });
 
 handler.put(async (req, res) => {
-
     if(req.query?.ID){
         if(req.query?.status){
             await db.connect();
