@@ -1,32 +1,39 @@
-import nc from 'next-connect';
-import db from '../../../../utils/db';
-import { onError } from '../../../../utils/error';
-import slugify from 'slugify';
-import Category from '../../../../models/Category';
-  
+import nc from "next-connect";
+import slugify from "slugify";
+import Category from "../../../../models/Category";
+import db from "../../../../utils/db";
+import { onError } from "../../../../utils/error";
+
 const handler = nc({ onError });
 
 handler.post(async (req, res) => {
-    const { 
-      categoryName
-    } = req.body;
+  const { categoryName } = req.body;
 
-    await db.connect();
-        // Category.find({
-        //     categorySlug: slugify(`${ categoryName }`, '-')
-        // }).exec()
-        const category = new Category({
-          categoryName,
-          categorySlug: slugify(`${ categoryName }`, '-')
+  await db.connect();
+  Category.find({
+    categorySlug: slugify(`${categoryName}`, "-"),
+  }).exec(async (error, data) => {
+    if (data.length > 0) {
+      return res.status(400).json({
+        success: false,
+        message: "Category already Added",
+        
+        
+      });
+    } else {
+      const category = new Category({
+        categoryName,
+        categorySlug: slugify(`${categoryName}`, "-"),
+      });
+      if (await category.save()) {
+        await db.disconnect();
+        return res.send({
+          success: true,
+          message: "Category added successfully",
         });
-        if(await category.save()){
-            await db.disconnect();
-             return res.send({
-                success: true,
-                message: 'Category added successfully'
-            })
-        }
+      }
+    }
+  });
 });
 
 export default handler;
-  
