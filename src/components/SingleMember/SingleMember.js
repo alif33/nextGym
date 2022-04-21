@@ -11,6 +11,29 @@ const SingleMember = ({memberId}) => {
     .then(data => setMember(data))
   }, [memberId])
 
+  const handleStatus = async (status) => {
+   if(status){
+   
+    const formData = await new FormData();
+    formData.append("firstName", member.firstName);
+    formData.append("lastName", member.lastName);
+    formData.append("gender", member.gender);
+    formData.append("mobile", member.mobile);
+    formData.append("username", member.username);
+    formData.append("password", member.password);
+    formData.append("_package", member._package);
+    formData.append("_valid", member._valid);
+    formData.append("valid_", member.valid_);
+    formData.append("payDate", member.payDate);
+    formData.append("image", member.image[0]);
+    await submitData(formData);
+    
+   }
+  }
+const submitData =(data) => {
+  console.log(data)
+}
+
   return (
     <section className="app-user-view-account">
       <div className="row">
@@ -78,25 +101,33 @@ const SingleMember = ({memberId}) => {
                   <span>{member.mobile}</span>
                 </li>
                 <li className="mb-75">
+                  <span className="fw-bolder me-25">Password:</span>
+                  <span>{member.password}</span>
+                </li>
+                <li className="mb-75">
                   <span className="fw-bolder me-25">Payment Date:</span>
                   <span>{new Date (member.payDate).toLocaleDateString()}</span>
                 </li>
                
                 <li className="mb-75">
-                  <span className="fw-bolder me-25">Validation Started</span>
+                  <span className="fw-bolder me-25">Validation Started:</span>
                   <span>{new Date(member._valid).toLocaleDateString()}</span>
                 </li>
                 <li className="mb-75">
-                  <span className="fw-bolder me-25">Validation ending</span>
+                  <span className="fw-bolder me-25">Validation ending:</span>
                   <span>{new Date(member.valid_).toLocaleDateString()}</span>
                 </li>
+                
                   
               </ul>
               <div className="d-flex justify-content-center pt-2">
-                <a href="javascript:;" className="btn btn-primary me-1 waves-effect waves-float waves-light" data-bs-target="#editUser" data-bs-toggle="modal">
+                <button className="btn btn-primary me-1 waves-effect waves-float waves-light" data-bs-target="#editUser" data-bs-toggle="modal">
                   Edit
-                </a>
-                <a href="javascript:;" className="btn btn-outline-danger suspend-user waves-effect">Inactive</a>
+                </button>
+               {
+                 member.status ?  <button onClick={() => handleStatus(member.status)}  className="btn btn-outline-danger suspend-user waves-effect">Inactive</button>:
+                 <button onClick={() => handleStatus(member.status)} className="btn btn-outline-danger suspend-user waves-effect">Active</button>
+               }
               </div>
             </div>
           </div>
