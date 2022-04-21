@@ -101,29 +101,20 @@ export const menuItem = [
     {id: 7,
      url: '#',
      title: 'Nutriation/Diet',
-     size: '211px',
+     size: '140px',
      icon: <FileText/>,
      children: [
          {id: 1,
-          url: '/admin/nutriation/diet/add',
+          url: '/admin/nutriation-or-diet/add',
           title: 'Add',
           icon: <Circle/>
         },
          {id: 2,
-          url: '/admin/invoice/preview',
+          url: '/admin/nutriation-or-diet/preview',
           title: 'Preview',
           icon: <Circle/>
         },
-         {id: 3,
-          url: '/admin/invoice/edit',
-          title: 'Edit',
-          icon: <Circle/>
-        },
-         {id: 4,
-          url: '/admin/invoice/add',
-          title: 'Add',
-          icon: <Circle/>
-        },
+         
      ]
     }
   
