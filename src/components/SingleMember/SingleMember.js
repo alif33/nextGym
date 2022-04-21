@@ -20,64 +20,102 @@ const SingleMember = () => {
             <div className="col-12 col-md-7">
               <div className="row">
                 <div className="col-md-11 mx-auto ">
-                  <div className="d-flex justify-content-between ">
-                    <h5>Name</h5>
-                    <h5>Abubokor Siddik</h5>
+                  <div className="row border-primary  rounded pt-1 px-1  mb-1">
+                    <p className="col-md-3 ">Name</p>
+                    <p className=" col-md-9">Abubokor Siddik</p>
                   </div>
-                  <div className="d-flex justify-content-between">
-                    <h5>Gender</h5>
-                    <h5>Male</h5>
+                  <div className="row border-primary  rounded pt-1 px-1 mb-1">
+                    <p className="col-md-3 ">Gender</p>
+                    <p className=" col-md-9">Male</p>
                   </div>
-                  <div className="d-flex justify-content-between">
-                    <h5>Mobile</h5>
-                    <h5>01621675233</h5>
+                  <div className="row border-primary  rounded pt-1 px-1 mb-1">
+                    <p className="col-md-3 ">Mobile</p>
+                    <p className=" col-md-9">01621675233</p>
                   </div>
-                  <div className="d-flex justify-content-between">
-                    <h5>Username</h5>
-                    <h5>admin</h5>
+                  <div className="row border-primary  rounded pt-1 px-1 mb-1">
+                    <p className="col-md-3 ">Username</p>
+                    <p className=" col-md-9">admin</p>
                   </div>
-                  <div className="d-flex justify-content-between">
-                    <h5>Password</h5>
-                    <h5>password</h5>
+                  <div className="row border-primary  rounded pt-1 px-1 mb-1">
+                    <p className="col-md-3 ">Password</p>
+                    <p className=" col-md-9">password</p>
                   </div>
-                  {/* </div>
-                <div className="col-md-6"> */}
-                  <div className="d-flex justify-content-between">
-                    <h5>Ship Package</h5>
-                    <h5>One</h5>
+                  <div className="row border-primary  rounded pt-1 px-1 mb-1">
+                    <p className="col-md-3 ">Ship Package</p>
+                    <p className=" col-md-9">One</p>
                   </div>
-                  <div className="d-flex justify-content-between">
-                    <h5>Valid Form</h5>
-                    <h5>{new Date().toLocaleDateString()}</h5>
+                  <div className="row border-primary  rounded pt-1 px-1 mb-1">
+                    <p className="col-md-3 ">Valid Form</p>
+                    <p className=" col-md-9">
+                      {new Date().toLocaleDateString()}
+                    </p>
                   </div>
-                  <div className="d-flex justify-content-between">
-                    <h5>Valid To</h5>
-                    <h5>{new Date().toLocaleDateString()}</h5>
+                  <div className="row border-primary  rounded pt-1 px-1 mb-1">
+                    <p className="col-md-3 ">Valid To</p>
+                    <p className=" col-md-9">
+                      {new Date().toLocaleDateString()}
+                    </p>
                   </div>
-                  <div className="d-flex justify-content-between">
-                    <h5>Payment Date</h5>
-                    <h5>{new Date().toLocaleDateString()}</h5>
+                  <div className="row border-primary  rounded pt-1 px-1 mb-1">
+                    <p className="col-md-3 ">Payment Date</p>
+                    <p className=" col-md-9">
+                      {new Date().toLocaleDateString()}
+                    </p>
                   </div>
-                </div>
-                <div className="">
-                  <button
-                    className=" border-0 float-end px-4 py-1 bg-info fw-bold rounded-pill"
-                    onClick={() => setToggle(!toggle)}
-                  >
-                    Action
-                  </button>
-                  {toggle ? (
-                    <div className="">
-                      <button className=" border-0 px-3 py-1 bg-info fw-bold rounded-pill">
-                        Active
-                      </button>
-                      <button className=" border-0  mx-1 px-3 py-1 bg-info fw-bold rounded-pill">
-                        Inactive
-                      </button>
+                  <div className="row border-primary  rounded pt-1 px-1 mb-1">
+                    <p className="col-md-3 ">Status</p>
+                    <div className="col-md-9">
+                      <div className="d-flex">
+                        <p className="text-success">Active</p>
+                        {/* <p className="text-warning">Inactive</p> */}
+                        <div className="dropdown mx-2">
+                          <button
+                            onClick={() => setToggle(!toggle)}
+                            type="button"
+                            className={`btn btn-sm dropdown-toggle hide-arrow py-0 waves-effect waves-float waves-light ${
+                              toggle ? "show" : ""
+                            }`}
+                            data-bs-toggle="dropdown"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width={14}
+                              height={14}
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth={2}
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              className="feather feather-more-vertical"
+                            >
+                              <circle cx={12} cy={12} r={1} />
+                              <circle cx={12} cy={5} r={1} />
+                              <circle cx={12} cy={19} r={1} />
+                            </svg>
+                          </button>
+                          <div
+                            className={`dropdown-menu dropdown-menu-end ${
+                              toggle ? "show" : ""
+                            }`}
+                            style={
+                              toggle
+                                ? {
+                                    position: "absolute",
+                                    inset: "0px auto auto 0px",
+                                    margin: "0px",
+                                    transform: "translate(-93px, 14px)",
+                                  }
+                                : {}
+                            }
+                          >
+                            <span className="dropdown-item">Active</span>
+                            <span className="dropdown-item">Inactive</span>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                  ) : (
-                    ""
-                  )}
+                  </div>
                 </div>
               </div>
             </div>
