@@ -1,8 +1,19 @@
-import React from "react";
-import { productData } from "./ProductData";
+import React, { useEffect, useState } from "react";
+import { getData } from "../../../__lib__/helpers/HttpService";
 import ProductTable from "./ProductTable";
 
 const ProductList = () => {
+
+  const [products, setProducts] = useState([])
+  
+  useEffect(() => {
+    getData('/admin/products')
+    .then(data => {
+      setProducts(data)
+    })
+  },[])
+
+
   return (
     <div className="row" id="basic-table">
       <div className="col-12">
@@ -17,14 +28,15 @@ const ProductList = () => {
                 <tr>
                   <th>Photo</th>
                   <th>Name</th>
-                  <th>Start Date</th>
-                  <th>Expired Date</th>
-                  <th>Status</th>
+                  <th>Price</th>
+                  <th>Quantity</th>
+                  <th>Company</th>
                   <th>Actions</th>
+                  <th>Details</th>
                 </tr>
               </thead>
               <tbody>
-               {productData.map((data, i) => <ProductTable key={i} data={data}/>)}
+               {products.map((data, i) => <ProductTable key={i} data={data}/>)}
               </tbody>
             </table>
           </div>

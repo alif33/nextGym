@@ -1,4 +1,6 @@
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import * as Icon from 'react-feather';
 
 const ProductTable = ({data}) => {
     const [toggle, setToggle] = useState(false)
@@ -21,7 +23,7 @@ const ProductTable = ({data}) => {
       <tr>
         <td>
           <img
-            src={data.img}
+            src={data.image}
             className="me-75"
             height={20}
             width={20}
@@ -29,13 +31,9 @@ const ProductTable = ({data}) => {
           />
         </td>
         <td>{data.name}</td>
-        <td>{data.startDate}</td>
-        <td>{data.expiredDate}</td>
-        <td>
-          <span className={`badge rounded-pill badge-light-${data.status === 'Active' ? 'primary' : 'danger'} me-1`}>
-            {data.status}
-          </span>
-        </td>
+        <td>${data.price}</td>
+        <td>{data.quantity}</td>
+        <td>{data.manufacturerCompany}</td>
         <td>
           <div className="dropdown">
             <button
@@ -100,6 +98,14 @@ const ProductTable = ({data}) => {
               </a>
             </div>
           </div>
+        </td>
+        <td>
+          <Link href={`/admin/product/list/${data._id}`}>
+          <a >
+          <Icon.Link/>
+
+          </a>
+          </Link>          
         </td>
       </tr>
     </>
