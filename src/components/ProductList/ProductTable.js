@@ -61,7 +61,8 @@ const ProductTable = ({data}) => {
               </svg>
             </button>
             <div className={`dropdown-menu dropdown-menu-end ${toggle ? 'show' :''}`} style={ toggle ? {position: 'absolute', inset: '0px auto auto 0px', margin: '0px', transform: 'translate(-93px, 14px)'} : {}}>
-              <a className="dropdown-item" href="#">
+             <Link  href={`/admin/product/edit/${data._id}`}>
+             <a className="dropdown-item">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width={14}
@@ -78,6 +79,7 @@ const ProductTable = ({data}) => {
                 </svg>
                 <span>Edit</span>
               </a>
+             </Link>
               <a className="dropdown-item" href="#">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
