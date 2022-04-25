@@ -26,6 +26,7 @@ handler.put(async (req, res) => {
                 await db.disconnect();
                 res.send({
                     success: true,
+                    message: 'Member updated successfully'
                 })
             }
         }else{
@@ -38,7 +39,8 @@ handler.put(async (req, res) => {
                 _package, 
                 _valid, 
                 valid_, 
-                payDate 
+                payDate, 
+                status
               } = req.body;
 
               await db.connect();
@@ -51,7 +53,8 @@ handler.put(async (req, res) => {
                     "mobile": mobile, 
                     "_package": _package, 
                     "_valid": _valid, 
-                    "valid_": valid_
+                    "valid_": valid_,
+                    "status": status
                 }}
               );
               if(update.modifiedCount){

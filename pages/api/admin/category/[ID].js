@@ -1,15 +1,14 @@
 import nc from 'next-connect';
-import Member from '../../../../models/Member';
+import Category from "../../../../models/Category";
 import db from '../../../../utils/db';
-
 const handler = nc();
 
 handler.get(async (req, res) => {
     if(req.query?.ID){
         await db.connect();
-    const member = await Member.findById(req.query.ID);
+    const category = await Category.findById(req.query.ID);
         await db.disconnect();
-        res.send(member);
+        res.send(category);
     }
 });
 
@@ -18,7 +17,7 @@ handler.put(async (req, res) => {
     if(req.query?.ID){
         if(req.query?.status){
             await db.connect();
-            const update = await Member.updateOne(
+            const update = await Category.updateOne(
                 { "_id": req.query.ID }, 
                 { $set: { "status": req.query.status } }
                )
@@ -31,28 +30,15 @@ handler.put(async (req, res) => {
             }
         }else{
             const { 
-                firstName, 
-                lastName, 
-                gender, 
-                mobile, 
-                password, 
-                _package, 
-                _valid, 
-                valid_, 
-                payDate 
+              categoryName
               } = req.body;
 
               await db.connect();
-              const update = await Member.updateOne(
+              const update = await Category.updateOne(
                 { "_id": req.query.ID }, 
                 { $set: { 
-                    "firstName": firstName,
-                    "lastName": lastName, 
-                    "gender": gender, 
-                    "mobile": mobile, 
-                    "_package": _package, 
-                    "_valid": _valid, 
-                    "valid_": valid_
+                    "categoryName": categoryName,
+                   
                 }}
               );
               if(update.modifiedCount){
@@ -65,5 +51,16 @@ handler.put(async (req, res) => {
         }
     }
 });
+
+handler.Delete(async (req, res) => {
+    if(req.query?.ID){
+        Category.find({ _id: req.query.ID  }).remove(()=>{
+            res.send({
+                success: true,
+                message: 'Product deleted successfully'
+            });
+        });
+    }
+  });
 
 export default handler;

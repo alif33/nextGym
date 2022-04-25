@@ -20,7 +20,7 @@ useEffect(()=>{
             <h4 className="card-title">Member Lists</h4>
           </div>
          
-          <div className="table-responsive" style={members.length < 5 ? {height: '200px'}: {}}>
+          <div className="table-responsive" style={members?.length < 5 ? {height: '200px'}: {}}>
             <table className="table">
               <thead>
                 <tr>
@@ -34,7 +34,7 @@ useEffect(()=>{
                 </tr>
               </thead>
               <tbody>
-               {members.map((data, i) => <MemberTable key={i} data={data}/>)}
+               {members?.map((data, i) => <MemberTable key={i} data={data}/>)}
               </tbody>
             </table>
           </div>

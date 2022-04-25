@@ -1,10 +1,10 @@
-import nc from 'next-connect';
-import db from '../../../../utils/db';
-import multer from 'multer';
-import { onError } from '../../../../utils/error';
 import { v2 as cloudinary } from 'cloudinary';
+import multer from 'multer';
+import nc from 'next-connect';
 import streamifier from 'streamifier';
 import Product from '../../../../models/Product';
+import db from '../../../../utils/db';
+import { onError } from '../../../../utils/error';
 
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -31,7 +31,9 @@ handler.use(upload.single('image')).post(async (req, res) => {
       manufacturerCompany, 
       manufacturerDate, 
       description, 
-      specification
+      specification,
+      category
+
     } = req.body;
 
     const streamUpload = (req) => {
@@ -59,6 +61,7 @@ handler.use(upload.single('image')).post(async (req, res) => {
           manufacturerDate, 
           description, 
           specification,
+          category,
           image: url
         });
         if(await product.save()){

@@ -27,6 +27,7 @@ const AddProduct = () => {
     formData.append("manufacturerDate", data.manufacturerDate);
     formData.append("description", data.description);
     formData.append("specification", data.specification);
+    formData.append("category", data.category);
     formData.append("image", data.image[0]);
     await submitData(formData);
   };

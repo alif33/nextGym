@@ -1,12 +1,14 @@
 import Link from "next/link";
 import React from "react";
+import { Toaster } from "react-hot-toast";
 import SingleMember from "../../../../src/components/SingleMember/SingleMember";
 import { adminAuth } from "../../../../__lib__/helpers/requireAuthentication";
 import AdminLayout from "./../../../../src/components/AdminLayout/AdminLayout";
 
-const MemberId = ({memberId}) => {
+const MemberId = ({ memberId }) => {
   return (
     <AdminLayout>
+      <Toaster position="top-center" reverseOrder={false} />
       <div className="content-header row">
         <div className="content-header-left col-md-9 col-12 mb-2">
           <div className="row breadcrumbs-top">
@@ -15,7 +17,7 @@ const MemberId = ({memberId}) => {
               <div className="breadcrumb-wrapper">
                 <ol className="breadcrumb">
                   <li className="breadcrumb-item">
-                  <Link href="/admin/dashboard">
+                    <Link href="/admin/dashboard">
                       <a>Dashboard</a>
                     </Link>
                   </li>
@@ -23,26 +25,22 @@ const MemberId = ({memberId}) => {
                     <a href="#">Members</a>
                   </li>
                   <li className="breadcrumb-item active">
-                   <Link href="/admin/member/list">
-                   <a >Member lists</a>
-                   </Link>
+                    <Link href="/admin/member/list">
+                      <a>Member lists</a>
+                    </Link>
                   </li>
-                  <li className="breadcrumb-item active">
-                  {memberId}
-                  </li>
+                  <li className="breadcrumb-item active">{memberId}</li>
                 </ol>
               </div>
             </div>
           </div>
         </div>
         <div className="content-header-right text-md-end col-md-3 col-12 d-md-block d-none">
-          <div className="mb-1 breadcrumb-right d-none">
-           
-          </div>
+          <div className="mb-1 breadcrumb-right d-none"></div>
         </div>
       </div>
       <div className="content-body">
-         <SingleMember memberId={memberId}/>
+        <SingleMember memberId={memberId} />
       </div>
     </AdminLayout>
   );
@@ -50,11 +48,11 @@ const MemberId = ({memberId}) => {
 
 export default MemberId;
 
-export const getServerSideProps = adminAuth(context => {
-    const {memberId} = context.params
-    return {
-        props: {
-            memberId
-        }
-    }
-  })
+export const getServerSideProps = adminAuth((context) => {
+  const { memberId } = context.params;
+  return {
+    props: {
+      memberId,
+    },
+  };
+});
