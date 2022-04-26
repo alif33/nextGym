@@ -1,7 +1,10 @@
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import Barcode from 'react-barcode';
 import { getData } from './../../../__lib__/helpers/HttpService';
 
 const SingleStaffMember = ({staffId}) => {
+  const router = useRouter()
   const [toggle, setToggle] = useState(false);
   const [staff, setStaff] = useState({})
 
@@ -38,7 +41,7 @@ const submitData =(data) => {
     <section className="app-user-view-account">
       <div className="row">
 
-      <div className="col-xl-4 col-lg-5 col-md-5 order-1 order-md-0">
+      <div className="col-xl-8 col-lg-5 col-md-5 order-1 order-md-0 mx-auto">
         {/* User Card */}
         <div className="card">
           <div className="card-body">
@@ -115,8 +118,11 @@ const submitData =(data) => {
                 </li>
                   
               </ul>
+              <div className="d-flex justify-content-center">
+              <Barcode width={1.2} height={60} value={staffId} />
+              </div>
               <div className="d-flex justify-content-center pt-2">
-                <button className="btn btn-primary me-1 waves-effect waves-float waves-light" data-bs-target="#editUser" data-bs-toggle="modal">
+                <button onClick={() => router.push(`/admin/staff/edit/${staffId}`)} className="btn btn-primary me-1 waves-effect waves-float waves-light" data-bs-target="#editUser" data-bs-toggle="modal">
                   Edit
                 </button>
                {/* {
