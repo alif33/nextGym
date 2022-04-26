@@ -5,6 +5,7 @@ import { onError } from '../../../../utils/error';
 import { v2 as cloudinary } from 'cloudinary';
 import streamifier from 'streamifier';
 import Member from '../../../../models/Member';
+import { isAdmin } from '../../../../utils/auth';
 
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -22,7 +23,7 @@ const handler = nc({ onError });
 const upload = multer();
 
 
-handler.use(upload.single('image')).post(async (req, res) => {
+handler.use(upload.single('image'), isAdmin).post(async (req, res) => {
     const { 
       firstName, 
       lastName, 
@@ -63,7 +64,8 @@ handler.use(upload.single('image')).post(async (req, res) => {
           _valid, 
           valid_, 
           payDate,
-          image: url
+          image: url,
+          _owner: req.admin._id
         });
         if(await member.save()){
             await db.disconnect();

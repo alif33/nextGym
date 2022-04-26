@@ -53,8 +53,12 @@ const memberSchema = new mongoose.Schema(
         status: {
             type: Boolean,
             default: true
+        },
+        _owner: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'admin',
+            required: true
         }
-
     },
     { timestamps: true }
 );

@@ -40,6 +40,11 @@ const staffSchema = new mongoose.Schema(
         salary: {
             type: Number,
             required: true
+        },
+        _owner: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'admin',
+            required: true
         }
     },
     { timestamps: true }

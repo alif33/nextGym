@@ -18,7 +18,6 @@ handler.post(async (req, res) => {
         success: false,
         message: "Category already Added",
         
-        
       });
     } else {
       const category = new Category({
