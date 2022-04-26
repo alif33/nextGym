@@ -60,7 +60,7 @@ const AddProduct = () => {
         <div className="col-12">
           <div className="card">
             <div className="card-header">
-              <h4 className="card-title">Add Member</h4>
+              <h4 className="card-title">Add Product</h4>
             </div>
             <div className="card-body">
               <form className="form" onSubmit={handleSubmit(onSubmit)}>

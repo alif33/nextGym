@@ -13,7 +13,7 @@ const MemberEdit = ({ memberId }) => {
   useEffect(() => {
     getData(`/admin/member/${memberId}`).then((data) => setMember(data));
   }, []);
-  console.log(member);
+
   const male = member?.gender === "MALE";
   const female = member?.gender === "FEMALE";
   const _valid = dateFormat(member?._valid, "yyyy-mm-dd");
