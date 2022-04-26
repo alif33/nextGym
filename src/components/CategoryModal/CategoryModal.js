@@ -1,14 +1,19 @@
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
+import { useDispatch } from 'react-redux';
 import Cookies from "universal-cookie";
+import { setCategories } from '../../../store/catrgories/actions';
 import { authPost } from '../../../__lib__/helpers/HttpService';
 import Modals from '../Modals/Modals';
 
 
 const CategoryModal = ({trigger,setTrigger}) => {
+  const dispatch = useDispatch()
   const [disable, setDisable] = useState(false)
   const cookies = new Cookies();
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -27,6 +32,8 @@ const CategoryModal = ({trigger,setTrigger}) => {
         toast.success(res.message);
         reset();
         setDisable(false);
+        dispatch(setCategories())
+
       } else {
         setDisable(false);
         toast.error(res.message)

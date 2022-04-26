@@ -1,14 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
+import { useDispatch, useSelector } from 'react-redux';
 import Cookies from "universal-cookie";
+import { setCategories } from "../../../store/catrgories/actions";
 import CategoryModal from "../CategoryModal/CategoryModal";
-import { authPost, getData } from "./../../../__lib__/helpers/HttpService";
+import { authPost } from "./../../../__lib__/helpers/HttpService";
 
 const AddProduct = () => {
+  // const [categories, setCategories] = useState([])
+  const dispatch = useDispatch()
+  const {categories} = useSelector(state => state)
   const [trigger, setTrigger] = useState(false);
   const cookies = new Cookies();
   const [disable, setDisable] = useState(false);
+
+  useEffect(() => {
+    // getData('/admin/categories')
+    // .then(data => setCategories(data))
+      dispatch(setCategories())
+  }, [])
+
+  const {categoryList} = categories
   const {
     register,
     handleSubmit,
@@ -47,11 +60,6 @@ const AddProduct = () => {
     });
   };
 
-  const [categories, setCategories] = useState([])
-  useEffect(() => {
-    getData('/admin/categories')
-    .then(data => setCategories(data))
-  }, [])
 
   return (
     <section id="multiple-column-form">
@@ -208,14 +216,14 @@ const AddProduct = () => {
                     </label>
                     <div className="d-flex align-items-center">
                       <div>
-                        {categories.length> 0 ? <select
+                        {categoryList.length> 0 ? <select
                           {...register("category", { required: true })}
                           name="category"
                           className="form-select"
                           id="selectDefault"
                         >
                           <option selected>Select Category</option>
-                        {categories.map((cate, i) =>   <option key={i} value={i+1}>{cate.categoryName}</option>)}
+                        {categoryList.length > 0 && categoryList.map((cate, i) =>   <option key={i} value={i+1}>{cate.categoryName}</option>)}
                      
                         </select> : <span>Loading...</span>}
                       </div>
