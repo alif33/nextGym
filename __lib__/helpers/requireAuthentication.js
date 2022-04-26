@@ -1,14 +1,14 @@
 const cookie = require('cookie')
 
-export function userAuth(gssp) {
+export function ownerAuth(gssp) {
     return async (context) => {
         const { req, res } = context
         if (req.headers.cookie) {
             const cookies = cookie.parse(req.headers.cookie)
-            if (!cookies.user_token) {
+            if (!cookies._owner) {
                 return {
                     redirect: {
-                        destination: '/login',
+                        destination: '/a/login',
                     }
                 }
             }
@@ -16,7 +16,7 @@ export function userAuth(gssp) {
         } else {
             return {
                 redirect: {
-                    destination: '/login',
+                    destination: '/a/login',
 
                 }
             }

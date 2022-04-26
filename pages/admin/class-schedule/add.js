@@ -1,10 +1,10 @@
 import React from "react";
 import { Toaster } from "react-hot-toast";
-import AddProduct from "../../../src/components/AddProduct/AddProduct";
 import AdminLayout from "../../../src/components/AdminLayout/AdminLayout";
+import ClassScheduleField from "../../../src/components/ClassSchedulField/ClassScheduleField";
 import { adminAuth } from "../../../__lib__/helpers/requireAuthentication";
 
-const Add = () => {
+const AddClass = () => {
   return (
     <AdminLayout>
        <Toaster position="top-center" reverseOrder={false} />
@@ -20,10 +20,10 @@ const Add = () => {
                     <a href="index.html">Dashboard</a>
                   </li>
                   <li className="breadcrumb-item">
-                    <a href="#">Product</a>
+                    <a href="#">Class</a>
                   </li>
                   <li className="breadcrumb-item active">
-                    <a href="#">Add Product</a>
+                    <a href="#">Add Class Schedule</a>
                   </li>
                 </ol>
               </div>
@@ -34,13 +34,13 @@ const Add = () => {
 
       </div>
       <div className="content-body">
-          <AddProduct/>
+        <ClassScheduleField/>
       </div>
     </AdminLayout>
   );
 };
 
-export default Add;
+export default AddClass;
 
 export const getServerSideProps = adminAuth(context => {
   return {
