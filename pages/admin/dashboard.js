@@ -1,6 +1,8 @@
 import React from "react";
 import AdminLayout from "../../src/components/AdminLayout/AdminLayout";
+import ActiveMember from "../../src/components/Dashboard/ActiveMember";
 import StatisticsCard from "../../src/components/Dashboard/StatisticsCard";
+import TotalProduct from "../../src/components/Dashboard/TotalProduct";
 import { adminAuth } from "../../__lib__/helpers/requireAuthentication";
 import badge from "/public/img/badge.svg";
 
@@ -37,35 +39,19 @@ const Dashboard = () => {
             {/* /  Medal Card  */}
 
             {/* Statistics Card  */}
-           <StatisticsCard/>
+            <StatisticsCard />
             {/* / Statistics Card */}
           </div>
 
           <div className="row match-height">
             <div className="col-lg-4 col-12">
               <div className="row match-height">
-                {/* <!-- Bar Chart - Orders --> */}
-                <div className="col-lg-6 col-md-3 col-6">
-                  <div className="card">
-                    <div className="card-body pb-50">
-                      <h6>Orders</h6>
-                      <h2 className="fw-bolder mb-1">2,76k</h2>
-                      <div id="statistics-order-chart"></div>
-                    </div>
-                  </div>
-                </div>
-                {/* <!--/ Bar Chart - Orders --> */}
+                {/* <!-- Bar Chart - products --> */}
+                <TotalProduct/>
+                {/* <!--/ Bar Chart - products --> */}
 
                 {/* <!-- Line Chart - Profit --> */}
-                <div className="col-lg-6 col-md-3 col-6">
-                  <div className="card card-tiny-line-stats">
-                    <div className="card-body pb-50">
-                      <h6>Profit</h6>
-                      <h2 className="fw-bolder mb-1">6,24k</h2>
-                      <div id="statistics-profit-chart"></div>
-                    </div>
-                  </div>
-                </div>
+                <ActiveMember/>
                 {/* <!--/ Line Chart - Profit --> */}
 
                 {/* <!-- Earnings Card --> */}
@@ -160,8 +146,8 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
-export const getServerSideProps = adminAuth(context => {
+export const getServerSideProps = adminAuth((context) => {
   return {
-      props: {}
-  }
-})
+    props: {},
+  };
+});
