@@ -214,6 +214,20 @@ const PlanForm = () => {
               {errors.extra && <div className="text-danger">Please select</div>}
             </div>
           </div>
+          <div className="col-md-6 col-12">
+            <div className="mb-1">
+              <label className="d-block form-label" htmlFor="extra">Description</label>
+              <textarea
+              rows={6}
+                {...register("extra", { required: true })}
+                className="form-control"
+                id="extra"
+              >
+              </textarea>
+              {errors.extra && <div className="text-danger">Please select</div>}
+            </div>
+          </div>
+
           <div className="col-12">
             {disable ? (
               <button

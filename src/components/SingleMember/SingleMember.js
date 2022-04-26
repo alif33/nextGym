@@ -1,4 +1,6 @@
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import Barcode from 'react-barcode';
 import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import Cookies from "universal-cookie";
@@ -7,6 +9,7 @@ import { updateData } from "./../../../__lib__/helpers/HttpService";
 
 
 const SingleMember = ({ memberId }) => {
+  const router = useRouter()
   const [toggle, setToggle] = useState(false);
   // const [member, setMember] = useState({});
   const [disable, setDisable] = useState(false);
@@ -46,7 +49,7 @@ console.log(member)
   return (
     <section className="app-user-view-account">
       <div className="row">
-        <div className="col-xl-4 col-lg-5 col-md-5 order-1 order-md-0">
+        <div className="col-xl-8 col-lg-5 col-md-5 order-1 order-md-0 mx-auto">
           {/* User Card */}
           <div className="card">
             <div className="card-body">
@@ -163,8 +166,12 @@ console.log(member)
                     <span>{new Date(member?.valid_).toLocaleDateString()}</span>
                   </li>
                 </ul>
+                <div className="d-flex justify-content-center">
+              <Barcode width={1.2} height={60} value={memberId} />
+              </div>
                 <div className="d-flex justify-content-center pt-2">
                   <button
+                  onClick={() => router.push(`/admin/member/edit/${memberId}`)}
                     className="btn btn-primary me-1 waves-effect waves-float waves-light"
                     data-bs-target="#editUser"
                     data-bs-toggle="modal"
