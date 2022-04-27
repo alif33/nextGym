@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import * as Icon from "react-feather";
+import BodypartsModal from '../BodypartsModal/BodypartsModal';
 
 const BodypartsTable = ({ data }) => {
   const [trigger, setTrigger] = useState(false)
@@ -20,7 +21,7 @@ const BodypartsTable = ({ data }) => {
 
   return (
     <>
-          {trigger && <EquipmentModal trigger={trigger} setTrigger={setTrigger} id={data._id}/>}
+          {trigger && <BodypartsModal trigger={trigger} setTrigger={setTrigger} id={data._id}/>}
       <tr>
         
       <td>
