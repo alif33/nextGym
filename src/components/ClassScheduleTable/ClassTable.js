@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import * as Icon from "react-feather";
 import SingleClassModal from "../SingleClass/SingleClass";
 import { getData } from './../../../__lib__/helpers/HttpService';
-
 const ClassTable = ({ data }) => {
   const [trigger, setTrigger] = useState(false)
   const [staff, setStaff] = useState()
@@ -22,7 +21,6 @@ const ClassTable = ({ data }) => {
     document.body.addEventListener("click", closeAction);
     return () => document.body.removeEventListener("click", closeAction);
   }, [data.staffMember]);
-  console.log(staff)
 
   return (
     <>

@@ -1,5 +1,5 @@
 import nc from 'next-connect';
-import Member from '../../../../models/Member';
+import ClassShedule from '../../../../models/ClassShedule';
 import db from '../../../../utils/db';
 
 const handler = nc();
@@ -7,9 +7,9 @@ const handler = nc();
 handler.get(async (req, res) => {
     if(req.query?.ID){
         await db.connect();
-    const member = await Member.findById(req.query.ID);
+    const classShedule = await ClassShedule.findById(req.query.ID);
         await db.disconnect();
-        res.send(member);
+        res.send(classShedule);
     }
 });
 
@@ -17,7 +17,7 @@ handler.put(async (req, res) => {
     if(req.query?.ID){
         if(req.query?.status){
             await db.connect();
-            const update = await Member.updateOne(
+            const update = await ClassShedule.updateOne(
                 { "_id": req.query.ID }, 
                 { $set: { "status": req.query.status } }
                )
@@ -44,7 +44,7 @@ handler.put(async (req, res) => {
               } = req.body;
 
               await db.connect();
-              const update = await Member.updateOne(
+              const update = await ClassShedule.updateOne(
                 { "_id": req.query.ID }, 
                 { $set: { 
                     "firstName": firstName,
