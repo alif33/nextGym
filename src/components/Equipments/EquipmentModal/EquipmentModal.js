@@ -3,13 +3,13 @@ import Cookies from "universal-cookie";
 import { getData } from "../../../../__lib__/helpers/HttpService";
 import Modals from "../../Modals/Modals";
 
-const LevelModal = ({ trigger, setTrigger, id }) => {
+const EquipmentModal = ({ trigger, setTrigger, id }) => {
   const [disable, setDisable] = useState(false);
-  const [level, setLevel] = useState();
+  const [equipment, setEquipment] = useState();
   const cookies = new Cookies();
 
   useEffect(() => {
-    getData(`/admin/level/${id}`).then((data) => setLevel(data));
+    getData(`/admin/equipment/${id}`).then((data) => setEquipment(data));
   }, [id]);
 
 
@@ -20,12 +20,12 @@ const LevelModal = ({ trigger, setTrigger, id }) => {
           <div>
             <div className="d-flex justify-content-center">
               <img
-                className="w-50 rounded-circle border-2"
-                src={level?.image}
+                className="w-50 rounded-circle border border-primary p-3"
+                src={equipment?.image}
                 alt=""
               />
             </div>
-            <h2 className="text-center">{level?.name}</h2>
+            <h2 className="text-center">{equipment?.name}</h2>
           </div>
         </div>
       </Modals>
@@ -33,4 +33,4 @@ const LevelModal = ({ trigger, setTrigger, id }) => {
   );
 };
 
-export default LevelModal;
+export default EquipmentModal;

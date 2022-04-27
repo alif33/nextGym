@@ -13,17 +13,17 @@ const LevelUpdate = ({ levelId }) => {
         <div className="content-header-left col-md-9 col-12 mb-2">
           <div className="row breadcrumbs-top">
             <div className="col-12">
-              <h2 className="content-header-title float-start mb-0">Product</h2>
+              <h2 className="content-header-title float-start mb-0">Levels</h2>
               <div className="breadcrumb-wrapper">
                 <ol className="breadcrumb">
                   <li className="breadcrumb-item">
                     <a href="index.html">Dashboard</a>
                   </li>
                   <li className="breadcrumb-item">
-                    <a href="#">Product</a>
+                    <a href="#">Levels</a>
                   </li>
                   <li className="breadcrumb-item active">
-                    <a href="#">Add Product</a>
+                    <a href="#">Edit Level</a>
                   </li>
                 </ol>
               </div>

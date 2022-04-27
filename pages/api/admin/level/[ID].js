@@ -8,9 +8,9 @@ const handler = nc();
 handler.get(async (req, res) => {
     if(req.query?.ID){
         await db.connect();
-    const product = await Level.findById(req.query.ID);
+    const level = await Level.findById(req.query.ID);
         await db.disconnect();
-        res.send(product);
+        res.send(level);
     }
 });
 

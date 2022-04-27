@@ -10,17 +10,17 @@ const BodypartsList = () => {
         <div className="content-header-left col-md-9 col-12 mb-2">
           <div className="row breadcrumbs-top">
             <div className="col-12">
-              <h2 className="content-header-title float-start mb-0">Levels</h2>
+              <h2 className="content-header-title float-start mb-0">Bodyparts</h2>
               <div className="breadcrumb-wrapper">
                 <ol className="breadcrumb">
                   <li className="breadcrumb-item">
                     <a href="index.html">Dashboard</a>
                   </li>
                   <li className="breadcrumb-item">
-                    <a href="#">Levels</a>
+                    <a href="#">Bodyparts</a>
                   </li>
                   <li className="breadcrumb-item active">
-                    <a href="#">Lavels lists</a>
+                    <a href="#">Bodyparts lists</a>
                   </li>
                 </ol>
               </div>

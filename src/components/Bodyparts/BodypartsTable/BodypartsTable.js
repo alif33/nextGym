@@ -20,6 +20,7 @@ const BodypartsTable = ({ data }) => {
 
   return (
     <>
+          {trigger && <EquipmentModal trigger={trigger} setTrigger={setTrigger} id={data._id}/>}
       <tr>
         
       <td>
@@ -75,7 +76,7 @@ const BodypartsTable = ({ data }) => {
                   : {}
               }
             >
-              <Link  href={`/admin/level/edit/${data._id}`}>
+              <Link  href={`/admin/bodyparts/edit/${data._id}`}>
                 <a className="dropdown-item" href="#">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -116,7 +117,7 @@ const BodypartsTable = ({ data }) => {
           </div>
         </td>
         <td>
-             <button className="btn btn-sm"> <Icon.Eye/></button>
+        <button onClick={() => setTrigger(true)} className="btn btn-sm"> <Icon.Eye/></button>
           </td>
       </tr>
     </>

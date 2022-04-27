@@ -4,16 +4,16 @@ import { toast } from "react-hot-toast";
 import Cookies from "universal-cookie";
 import { authPost, getData } from "../../../../__lib__/helpers/HttpService";
 
-const LevelUpdateField = ({levelId}) => {
+const EquipmentUpdateField = ({equipmentId}) => {
 
   const [trigger, setTrigger] = useState(false);
   const cookies = new Cookies();
   const [disable, setDisable] = useState(false);
-  const [level, setLevel] = useState()
+  const [equipment, setEquipment] = useState()
 
   useEffect(() => {
-    getData(`/admin/level/${levelId}`)
-    .then(data => setLevel(data))
+    getData(`/admin/equipment/${equipmentId}`)
+    .then(data => setEquipment(data))
   }, []);
 
   const {
@@ -52,7 +52,7 @@ const LevelUpdateField = ({levelId}) => {
         <div className="col-12">
           <div className="card">
             <div className="card-header">
-              <h4 className="card-title">Edit Lavel</h4>
+              <h4 className="card-title">Edit Equipment</h4>
             </div>
             <div className="card-body">
               <form className="form" onSubmit={handleSubmit(onSubmit)}>
@@ -69,7 +69,7 @@ const LevelUpdateField = ({levelId}) => {
                         className="form-control"
                         placeholder="Name"
                         name="name"
-                        defaultValue={level?.name}
+                        defaultValue={equipment?.name}
                       />
                       {errors.name && (
                         <div className="text-danger">
@@ -136,4 +136,4 @@ const LevelUpdateField = ({levelId}) => {
   );
 };
 
-export default LevelUpdateField;
+export default EquipmentUpdateField;

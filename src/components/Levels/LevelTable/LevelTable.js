@@ -21,7 +21,7 @@ const LevelTable = ({ data }) => {
 
   return (
     <>
-    {trigger && <LevelModal trigger={trigger} setTrigger={setTrigger}/>}
+    {trigger && <LevelModal trigger={trigger} setTrigger={setTrigger} id={data._id}/>}
       <tr>
         
       <td>

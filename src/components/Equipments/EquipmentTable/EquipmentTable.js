@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import * as Icon from "react-feather";
+import EquipmentModal from "../EquipmentModal/EquipmentModal";
 
 const EquipmentTable = ({ data }) => {
   const [trigger, setTrigger] = useState(false)
@@ -20,6 +21,7 @@ const EquipmentTable = ({ data }) => {
 
   return (
     <>
+      {trigger && <EquipmentModal trigger={trigger} setTrigger={setTrigger} id={data._id}/>}
       <tr>
         
       <td>
@@ -75,7 +77,7 @@ const EquipmentTable = ({ data }) => {
                   : {}
               }
             >
-              <Link  href={`/admin/level/edit/${data._id}`}>
+              <Link  href={`/admin/equipments/edit/${data._id}`}>
                 <a className="dropdown-item" href="#">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -116,7 +118,7 @@ const EquipmentTable = ({ data }) => {
           </div>
         </td>
         <td>
-             <button className="btn btn-sm"> <Icon.Eye/></button>
+        <button onClick={() => setTrigger(true)} className="btn btn-sm"> <Icon.Eye/></button>
           </td>
       </tr>
     </>
