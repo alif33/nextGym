@@ -19,11 +19,8 @@ const PlanForm = () => {
     const formData = await new FormData();
     formData.append("title", data.title);
     formData.append("monthlyPrice", data.monthlyPrice);
-    formData.append("annuallyPrice", data.annuallyPrice);
-    formData.append("breakfast", data.breakfast);
-    formData.append("dinner", data.dinner);
-    formData.append("lunch", data.lunch);
-    formData.append("extra", data.extra);
+    formData.append("status", data.status);
+    formData.append("ingredients", data.ingredients);
     formData.append("image", data.image[0]);
     await submitData(formData);
   };
@@ -85,54 +82,32 @@ const PlanForm = () => {
           <div className="col-md-6 col-12">
             <div className="mb-1">
               <label className="form-label" htmlFor="price">
-                Annually Price
+                Status
               </label>
-              <input
-                {...register("annuallyPrice", { required: true })}
-                className="form-control"
-                type="number"
-                id="annuallyPrice"
-                name="annuallyPrice"
-                placeholder="Enter Annually price"
-              />
+              <select 
+               {...register("status", { required: true })}
+               className="form-select">
+                <option value="BREAKFAST">Breakfast</option>
+                <option value="LUNCH">Lunch</option>
+                <option value="DINNER">Dinner</option>
+                <option value="EXTRA">Extra</option>
+              </select>
 
-              {errors.annuallyPrice && (
-                <div className="text-danger">Please enter Annually price</div>
+              {errors.monthlyPrice && (
+                <div className="text-danger">Please enter monthly price</div>
               )}
             </div>
           </div>
-          {/* <div className="col-md-6 col-12">
-                        <div className="mb-1">
-                          <label className="form-label" htmlFor="selectDefault">
-                            Membership Package
-                          </label>
-                          <select
-                            {...register("_package", { required: true })}
-                            className="form-select"
-                            id="selectDefault"
-                          >
-                            <option selected>Open this select menu</option>
-                            <option value={1}>One</option>
-                            <option value={2}>Two</option>
-                            <option value={3}>Three</option>
-                          </select>
-                          {errors._package && (
-                            <div className="text-danger">
-                              Please select package
-                            </div>
-                          )}
-                        </div>
-                      </div> */}
           <div className="col-md-6 col-12">
             <div className="mb-1">
-              <label htmlFor="customFile1" className="form-label">
+              <label htmlFor="image" className="form-label">
                 Plan image
               </label>
               <input
                 {...register("image", { required: true })}
                 className="form-control"
                 type="file"
-                id="customFile1"
+                id="image"
                 accept="image/png, image/gif, image/jpeg"
               />
               {errors.image && (
@@ -140,91 +115,20 @@ const PlanForm = () => {
               )}
             </div>
           </div>
-
           <div className="col-md-6 col-12">
             <div className="mb-1">
-              <label className="form-label" htmlFor="breakfast">
-                Breackfast
+              <label className="d-block form-label" htmlFor="extra">
+                Description
               </label>
-              <select
-                {...register("breakfast", { required: true })}
-                className="form-select"
-                id="breakfast"
-              >
-                <option selected>Select</option>
-                <option value={1}>True</option>
-                <option value={2}>False</option>
-              </select>
-              {errors.breakfast && (
-                <div className="text-danger">Please select </div>
-              )}
-            </div>
-          </div>
-
-          <div className="col-md-6 col-12">
-            <div className="mb-1">
-              <label className="d-block form-label" htmlFor="lunch">
-                Lunch
-              </label>
-              <select
-                {...register("lunch", { required: true })}
-                className="form-select"
-                id="lunch"
-              >
-                <option selected>Select</option>
-                <option value={1}>True</option>
-                <option value={2}>False</option>
-              </select>
-              {errors.lunch && <div className="text-danger">Please select</div>}
-            </div>
-          </div>
-          <div className="col-md-6 col-12">
-            <div className="mb-1">
-              <label className="d-block form-label" htmlFor="dinner">
-                Dinner
-              </label>
-              <select
-                {...register("dinner", { required: true })}
-                className="form-select"
-                id="dinner"
-              >
-                <option selected>Select</option>
-                <option value={1}>True</option>
-                <option value={2}>False</option>
-              </select>
-              {errors.dinner && (
-                <div className="text-danger">Please select</div>
-              )}
-            </div>
-          </div>
-          <div className="col-md-6 col-12">
-            <div className="mb-1">
-              <label className="d-block form-label" htmlFor="extra">Extra</label>
-              
-              <select
-                {...register("extra", { required: true })}
-                className="form-select"
-                id="extra"
-              >
-                <option selected>Select</option>
-                <option value={1}>True</option>
-                <option value={2}>False</option>
-              </select>
-
-              {errors.extra && <div className="text-danger">Please select</div>}
-            </div>
-          </div>
-          <div className="col-md-6 col-12">
-            <div className="mb-1">
-              <label className="d-block form-label" htmlFor="extra">Description</label>
               <textarea
-              rows={6}
-                {...register("extra", { required: true })}
+                rows={6}
+                {...register("ingredients", { required: true })}
                 className="form-control"
                 id="extra"
-              >
-              </textarea>
-              {errors.extra && <div className="text-danger">Please select</div>}
+              ></textarea>
+              {errors.ingredients && (
+                <div className="text-danger">Please select</div>
+              )}
             </div>
           </div>
 

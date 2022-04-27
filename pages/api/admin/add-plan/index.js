@@ -2,7 +2,7 @@ import { v2 as cloudinary } from "cloudinary";
 import multer from "multer";
 import nc from "next-connect";
 import streamifier from "streamifier";
-import AddPlan from "../../../../models/AddPlan";
+import Plan from "../../../../models/Plan";
 import db from "../../../../utils/db";
 import { onError } from "../../../../utils/error";
 
@@ -25,11 +25,8 @@ handler.use(upload.single("image")).post(async (req, res) => {
   const {
     title,
     monthlyPrice,
-    annuallyPrice,
-    lunch,
-    dinner,
-    breakfast,
-    extra,
+    status,
+    ingredients
   } = req.body;
   console.log(title)
 
@@ -49,21 +46,18 @@ handler.use(upload.single("image")).post(async (req, res) => {
 
   if (url) {
     await db.connect();
-    const product = new AddPlan({
+    const product = new Plan({
       title,
       monthlyPrice,
-      annuallyPrice,
-      lunch,
-      dinner,
-      breakfast,
-      extra,
+      status,
+      ingredients,
       image: url,
     });
     if (await product.save()) {
       await db.disconnect();
       res.send({
         success: true,
-        message: "Product added successfully",
+        message: "Plan added successfully",
       });
     }
   }

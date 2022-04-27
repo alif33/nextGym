@@ -66,6 +66,60 @@ export const menuItem = [
          },
       ]
      },
+     {id: 50,
+      url: '#',
+      title: 'Bodyparts ',
+      size: '140px',
+      icon: <FileText/>,
+      children: [
+          {id: 1,
+           url: '/admin/bodyparts/add',
+           title: 'Add',
+           icon: <Circle/>
+         },
+          {id: 2,
+           url: '/admin/bodyparts/list',
+           title: 'List',
+           icon: <Circle/>
+         },
+      ]
+     },
+     {id: 51,
+      url: '#',
+      title: 'Equipments ',
+      size: '140px',
+      icon: <FileText/>,
+      children: [
+          {id: 1,
+           url: '/admin/equipments/add',
+           title: 'Add',
+           icon: <Circle/>
+         },
+          {id: 2,
+           url: '/admin/equipments/list',
+           title: 'List',
+           icon: <Circle/>
+         },
+      ]
+     },
+     {id: 52,
+      url: '#',
+      title: 'Levels ',
+      size: '140px',
+      icon: <FileText/>,
+      children: [
+          {id: 1,
+           url: '/admin/levels/add',
+           title: 'Add',
+           icon: <Circle/>
+         },
+          {id: 2,
+           url: '/admin/levels/list',
+           title: 'List',
+           icon: <Circle/>
+         },
+      ]
+     },
      {id: 11,
       url: '#',
       title: 'Product',
