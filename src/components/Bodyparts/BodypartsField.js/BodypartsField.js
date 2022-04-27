@@ -14,8 +14,7 @@ const BodypartsField = () => {
   useEffect(() => {
     // getData('/admin/categories')
     // .then(data => setCategories(data))
-      
-  }, [])
+  }, []);
 
   const {
     register,
@@ -28,14 +27,6 @@ const BodypartsField = () => {
   const onSubmit = async (data) => {
     const formData = await new FormData();
     formData.append("name", data.name);
-    formData.append("price", data.price);
-    formData.append("quantity", data.quantity);
-    formData.append("sku", data.sku);
-    formData.append("manufacturerCompany", data.manufacturerCompany);
-    formData.append("manufacturerDate", data.manufacturerDate);
-    formData.append("description", data.description);
-    formData.append("specification", data.specification);
-    formData.append("category", data.category);
     formData.append("image", data.image[0]);
     await submitData(formData);
   };
@@ -43,7 +34,7 @@ const BodypartsField = () => {
   const submitData = async (data) => {
     setDisable(true);
     const admins = await cookies.get("_admin");
-    authPost("/admin/product", data, admins.token).then((res) => {
+    authPost("/admin/bodypart", data, admins.token).then((res) => {
       if (res.success) {
         toast.success(res.message);
         reset();
@@ -55,14 +46,13 @@ const BodypartsField = () => {
     });
   };
 
-
   return (
     <section id="multiple-column-form">
       <div className="row">
         <div className="col-12">
           <div className="card">
             <div className="card-header">
-              <h4 className="card-title">Add Product</h4>
+              <h4 className="card-title">Add Bodyparts</h4>
             </div>
             <div className="card-body">
               <form className="form" onSubmit={handleSubmit(onSubmit)}>
@@ -82,131 +72,15 @@ const BodypartsField = () => {
                       />
                       {errors.name && (
                         <div className="text-danger">
-                          Please enter product name
+                          Name is required
                         </div>
                       )}
-                    </div>
-                  </div>
-
-                  <div className="col-md-6 col-12">
-                    <div className="mb-1">
-                      <label className="form-label" htmlFor="username">
-                        Price
-                      </label>
-                      <input
-                        type="number"
-                        id="price"
-                        {...register("price", { required: true })}
-                        className="form-control"
-                        name="price"
-                        placeholder="Price $000"
-                      />
-                      {errors.price && (
-                        <div className="text-danger">Please enter price</div>
-                      )}
-                    </div>
-                  </div>
-                  <div className="col-md-6 col-12">
-                    <div className="mb-1">
-                      <label className="form-label" htmlFor="username">
-                        Quantity
-                      </label>
-                      <input
-                        type="number"
-                        id="price"
-                        {...register("quantity", { required: true })}
-                        className="form-control"
-                        name="quantity"
-                        placeholder="Quantity"
-                      />
-                      {errors.price && (
-                        <div className="text-danger">Please enter quantity</div>
-                      )}
-                    </div>
-                  </div>
-                  <div className="col-md-6 col-12">
-                    <div className="row">
-                      <div className="mb-1 col-md-6 col-12">
-                        <label className="form-label" htmlFor="username">
-                          SKU
-                        </label>
-                        <input
-                          type="text"
-                          id="sku"
-                          {...register("sku", { required: true })}
-                          className="form-control"
-                          name="sku"
-                          placeholder="SKU"
-                        />
-                        {errors.sku && (
-                          <div className="text-danger">Please enter sku</div>
-                        )}
-                      </div>
-                      <div className="mb-1 col-md-6 col-12">
-                        <label className="form-label" htmlFor="company-column">
-                          Specification
-                        </label>
-                        <input
-                          {...register("specification", { required: true })}
-                          type="text"
-                          id="specification"
-                          className="form-control"
-                          name="specification"
-                          placeholder="Specification"
-                        />
-                        {errors.specification && (
-                          <div className="text-danger">
-                            Please enter Specification
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-md-6 col-12">
-                    <div className="row">
-                      <div className="mb-1 col-md-6 col-12">
-                        <label className="form-label" htmlFor="company-column">
-                          Manufacturer Company
-                        </label>
-                        <input
-                          {...register("manufacturerCompany", {
-                            required: true,
-                          })}
-                          type="text"
-                          id="manufacturerCompany"
-                          className="form-control"
-                          name="manufacturerCompany"
-                          placeholder="Company Name"
-                        />
-                        {errors.manufacturerCompany && (
-                          <div className="text-danger">
-                            Please enter company name
-                          </div>
-                        )}
-                      </div>
-                      <div className="mb-1 col-md-6 col-12">
-                        <label className="form-label" htmlFor="company-column">
-                          Manufacturer Date
-                        </label>
-                        <input
-                          {...register("manufacturerDate", { required: true })}
-                          type="date"
-                          id="date"
-                          className="form-control"
-                          name="manufacturerDate"
-                        />
-                        {errors.manufacturerDate && (
-                          <div className="text-danger">
-                            Please enter manufacturer date
-                          </div>
-                        )}
-                      </div>
                     </div>
                   </div>
                   <div className="col-md-6 col-12">
                     <div className="mb-1">
                       <label htmlFor="customFile1" className="form-label">
-                        Product Image
+                        Image
                       </label>
                       <input
                         {...register("image", { required: true })}
@@ -217,23 +91,6 @@ const BodypartsField = () => {
                         name="image"
                       />
                       {errors.image && (
-                        <div className="text-danger">Please select image</div>
-                      )}
-                    </div>
-                  </div>
-                  <div className="col-md-6 col-12">
-                    <div className="mb-1">
-                      <label htmlFor="customFile1" className="form-label">
-                        Description
-                      </label>
-                      <textarea
-                        {...register("description", { required: true })}
-                        className="form-control"
-                        id="customFile1"
-                        name="description"
-                        rows={4}
-                      />
-                      {errors.description && (
                         <div className="text-danger">Please select image</div>
                       )}
                     </div>

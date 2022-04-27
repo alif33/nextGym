@@ -4,7 +4,7 @@ import { toast } from "react-hot-toast";
 import Cookies from "universal-cookie";
 import { authPost } from "../../../../__lib__/helpers/HttpService";
 
-const LevelsField = () => {
+const EquipmentField = () => {
   // const [categories, setCategories] = useState([])
 
   const [trigger, setTrigger] = useState(false);
@@ -34,7 +34,7 @@ const LevelsField = () => {
   const submitData = async (data) => {
     setDisable(true);
     const admins = await cookies.get("_admin");
-    authPost("/admin/level", data, admins.token).then((res) => {
+    authPost("/admin/equipment", data, admins.token).then((res) => {
       if (res.success) {
         toast.success(res.message);
         reset();
@@ -52,7 +52,7 @@ const LevelsField = () => {
         <div className="col-12">
           <div className="card">
             <div className="card-header">
-              <h4 className="card-title">Add Level</h4>
+              <h4 className="card-title">Add Equipment</h4>
             </div>
             <div className="card-body">
               <form className="form" onSubmit={handleSubmit(onSubmit)}>
@@ -72,7 +72,7 @@ const LevelsField = () => {
                       />
                       {errors.name && (
                         <div className="text-danger">
-                          Name is required
+                         Name is required
                         </div>
                       )}
                     </div>
@@ -135,4 +135,4 @@ const LevelsField = () => {
   );
 };
 
-export default LevelsField;
+export default EquipmentField;

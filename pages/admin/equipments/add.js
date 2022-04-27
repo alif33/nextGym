@@ -1,7 +1,7 @@
 import React from "react";
 import { Toaster } from "react-hot-toast";
-import AddProduct from "../../../src/components/AddProduct/AddProduct";
 import AdminLayout from "../../../src/components/AdminLayout/AdminLayout";
+import EquipmentField from "../../../src/components/Equipments/EquipmentField/EquipmentField";
 import { adminAuth } from "../../../__lib__/helpers/requireAuthentication";
 
 const Add = () => {
@@ -34,7 +34,7 @@ const Add = () => {
 
       </div>
       <div className="content-body">
-          <AddProduct/>
+          <EquipmentField/>
       </div>
     </AdminLayout>
   );
