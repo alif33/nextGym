@@ -3,6 +3,7 @@ import multer from "multer";
 import nc from "next-connect";
 import streamifier from "streamifier";
 import Bodypart from "../../../../models/Bodypart";
+import { isAdmin } from "../../../../utils/auth";
 import db from "../../../../utils/db";
 import { onError } from "../../../../utils/error";
 
@@ -21,7 +22,7 @@ export const config = {
 const handler = nc({ onError });
 const upload = multer();
 
-handler.use(upload.single("image")).post(async (req, res) => {
+handler.use(upload.single("image"), isAdmin).post(async (req, res) => {
   const {
     name
   } = req.body;
@@ -45,6 +46,7 @@ handler.use(upload.single("image")).post(async (req, res) => {
     const bodypart = new Bodypart({
       name,
       image: url,
+      _owner: req.admin._id
     });
     if (await bodypart.save()) {
       await db.disconnect();

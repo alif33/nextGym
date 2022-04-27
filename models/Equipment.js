@@ -10,6 +10,11 @@ const equipmentSchema = new mongoose.Schema(
         image: {
             type: String,
             required: true
+        },
+        _owner: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'admin',
+            required: true
         }
     },
     { timestamps: true }

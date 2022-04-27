@@ -3,6 +3,7 @@ import multer from "multer";
 import nc from "next-connect";
 import streamifier from "streamifier";
 import Equipment from "../../../../models/Equipment";
+import { isAdmin } from "../../../../utils/auth";
 import db from "../../../../utils/db";
 import { onError } from "../../../../utils/error";
 
@@ -21,7 +22,7 @@ export const config = {
 const handler = nc({ onError });
 const upload = multer();
 
-handler.use(upload.single("image")).post(async (req, res) => {
+handler.use(upload.single("image"), isAdmin).post(async (req, res) => {
   const {
     name
   } = req.body;
@@ -45,6 +46,7 @@ handler.use(upload.single("image")).post(async (req, res) => {
     const equipment = new Equipment({
       name,
       image: url,
+      _owner: req.admin._id
     });
     if (await equipment.save()) {
       await db.disconnect();
