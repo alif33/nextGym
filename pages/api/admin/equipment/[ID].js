@@ -1,6 +1,6 @@
 import nc from 'next-connect';
 import Equipment from '../../../../models/Equipment';
-import Member from '../../../../models/Member';
+import { isAdmin } from '../../../../utils/auth';
 import db from '../../../../utils/db';
 
 const handler = nc();
@@ -69,12 +69,12 @@ handler.put(async (req, res) => {
 
 
 
-handler.delete(async (req, res) => {
+handler.use(isAdmin).delete(async (req, res) => {
     if(req.query?.ID){
         Equipment.find({ _id: req.query.ID  }).remove(()=>{
             res.send({
                 success: true,
-                message: 'Product deleted successfully'
+                message: 'Equipment deleted successfully'
             });
         });
     }
