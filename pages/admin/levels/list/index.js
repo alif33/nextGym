@@ -1,6 +1,6 @@
 import React from "react";
 import AdminLayout from "../../../../src/components/AdminLayout/AdminLayout";
-import ProductList from "../../../../src/components/ProductList/ProductList";
+import LevelTableList from "../../../../src/components/Levels/LevelTable/LevelTableList";
 import { adminAuth } from "../../../../__lib__/helpers/requireAuthentication";
 
 const list = () => {
@@ -34,7 +34,7 @@ const list = () => {
         </div>
       </div>
       <div className="content-body">
-        <ProductList/>
+        <LevelTableList/>
       </div>
     </AdminLayout>
   );

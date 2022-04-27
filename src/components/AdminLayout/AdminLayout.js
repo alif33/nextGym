@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import AdminFooter from "../AdminFooter/AdminFooter";
 import AdminNav from "../AdminNav/AdminNav";
 import AdminSidebar from "../AdminSidebar/AdminSidebar";
 
@@ -30,7 +29,7 @@ const AdminLayout = ({ children }) => {
             {children}
             </div>
         </div>
-        <AdminFooter/>
+        {/* <AdminFooter/> */}
       </div>
     </>
   );

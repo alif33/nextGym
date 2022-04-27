@@ -1,26 +1,26 @@
 import React from "react";
 import AdminLayout from "../../../../src/components/AdminLayout/AdminLayout";
-import ProductList from "../../../../src/components/ProductList/ProductList";
+import BodyPartsTableList from "../../../../src/components/Bodyparts/BodypartsTable/BodyPartsTableList";
 import { adminAuth } from "../../../../__lib__/helpers/requireAuthentication";
 
-const list = () => {
+const BodypartsList = () => {
   return (
     <AdminLayout>
       <div className="content-header row">
         <div className="content-header-left col-md-9 col-12 mb-2">
           <div className="row breadcrumbs-top">
             <div className="col-12">
-              <h2 className="content-header-title float-start mb-0">Staff Members</h2>
+              <h2 className="content-header-title float-start mb-0">Levels</h2>
               <div className="breadcrumb-wrapper">
                 <ol className="breadcrumb">
                   <li className="breadcrumb-item">
                     <a href="index.html">Dashboard</a>
                   </li>
                   <li className="breadcrumb-item">
-                    <a href="#">Products</a>
+                    <a href="#">Levels</a>
                   </li>
                   <li className="breadcrumb-item active">
-                    <a href="#">Product lists</a>
+                    <a href="#">Lavels lists</a>
                   </li>
                 </ol>
               </div>
@@ -34,13 +34,13 @@ const list = () => {
         </div>
       </div>
       <div className="content-body">
-        <ProductList/>
+      <BodyPartsTableList/>
       </div>
     </AdminLayout>
   );
 };
 
-export default list;
+export default BodypartsList;
 
 export const getServerSideProps = adminAuth(context => {
   return {
