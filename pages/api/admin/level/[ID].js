@@ -1,6 +1,6 @@
 import nc from 'next-connect';
+import Level from '../../../../models/Level';
 import Member from '../../../../models/Member';
-import Product from '../../../../models/Product';
 import db from '../../../../utils/db';
 
 const handler = nc();
@@ -8,7 +8,7 @@ const handler = nc();
 handler.get(async (req, res) => {
     if(req.query?.ID){
         await db.connect();
-    const product = await Product.findById(req.query.ID);
+    const product = await Level.findById(req.query.ID);
         await db.disconnect();
         res.send(product);
     }
@@ -19,7 +19,7 @@ handler.put(async (req, res) => {
     if(req.query?.ID){
         if(req.query?.status){
             await db.connect();
-            const update = await Product.updateOne(
+            const update = await Level.updateOne(
                 { "_id": req.query.ID }, 
                 { $set: { "status": req.query.status } }
                )
@@ -32,14 +32,6 @@ handler.put(async (req, res) => {
             }
         }else{
             const { 
-                firstName, 
-                lastName, 
-                gender, 
-                mobile, 
-                password, 
-                _package, 
-                _valid, 
-                valid_, 
                 payDate 
               } = req.body;
 
@@ -47,12 +39,6 @@ handler.put(async (req, res) => {
               const update = await Member.updateOne(
                 { "_id": req.query.ID }, 
                 { $set: { 
-                    "firstName": firstName,
-                    "lastName": lastName, 
-                    "gender": gender, 
-                    "mobile": mobile, 
-                    "_package": _package, 
-                    "_valid": _valid, 
                     "valid_": valid_
                 }}
               );

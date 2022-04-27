@@ -1,10 +1,10 @@
 import React from "react";
 import { Toaster } from "react-hot-toast";
 import AdminLayout from "../../../../src/components/AdminLayout/AdminLayout";
-import ProductEdit from "../../../../src/components/ProductEdit/ProductEdit";
+import LevelUpdateField from "../../../../src/components/Levels/LevelUpdateField/LevelUpdateField";
 import { adminAuth } from "../../../../__lib__/helpers/requireAuthentication";
 
-const Edit = ({ productId }) => {
+const LevelUpdate = ({ levelId }) => {
   return (
     <AdminLayout>
       <Toaster position="top-center" reverseOrder={false} />
@@ -33,17 +33,17 @@ const Edit = ({ productId }) => {
         {/* /path */}
       </div>
       <div className="content-body">
-        <ProductEdit productId={productId} />
+        <LevelUpdateField levelId={levelId}/>
       </div>
     </AdminLayout>
   );
 };
 
-export default Edit;
+export default LevelUpdate;
 
 export const getServerSideProps = adminAuth((context) => {
-  const { productId } = context.params;
+  const { levelId } = context.params;
   return {
-    props: { productId },
+    props: { levelId },
   };
 });

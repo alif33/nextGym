@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import * as Icon from "react-feather";
+import LevelModal from "../LevelModal/LevelModal";
 
 const LevelTable = ({ data }) => {
   const [trigger, setTrigger] = useState(false)
@@ -20,6 +21,7 @@ const LevelTable = ({ data }) => {
 
   return (
     <>
+    {trigger && <LevelModal trigger={trigger} setTrigger={setTrigger}/>}
       <tr>
         
       <td>
@@ -75,7 +77,7 @@ const LevelTable = ({ data }) => {
                   : {}
               }
             >
-              <Link  href={`/admin/level/edit/${data._id}`}>
+              <Link  href={`/admin/levels/edit/${data._id}`}>
                 <a className="dropdown-item" href="#">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -116,7 +118,9 @@ const LevelTable = ({ data }) => {
           </div>
         </td>
         <td>
-             <button className="btn btn-sm"> <Icon.Eye/></button>
+            
+            <button onClick={() => setTrigger(true)} className="btn btn-sm"> <Icon.Eye/></button>
+          
           </td>
       </tr>
     </>

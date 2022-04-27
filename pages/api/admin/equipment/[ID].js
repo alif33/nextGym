@@ -1,6 +1,6 @@
 import nc from 'next-connect';
+import Equipment from '../../../../models/Equipment';
 import Member from '../../../../models/Member';
-import Product from '../../../../models/Product';
 import db from '../../../../utils/db';
 
 const handler = nc();
@@ -8,7 +8,7 @@ const handler = nc();
 handler.get(async (req, res) => {
     if(req.query?.ID){
         await db.connect();
-    const product = await Product.findById(req.query.ID);
+    const product = await Equipment.findById(req.query.ID);
         await db.disconnect();
         res.send(product);
     }
@@ -19,7 +19,7 @@ handler.put(async (req, res) => {
     if(req.query?.ID){
         if(req.query?.status){
             await db.connect();
-            const update = await Product.updateOne(
+            const update = await Equipment.updateOne(
                 { "_id": req.query.ID }, 
                 { $set: { "status": req.query.status } }
                )
@@ -71,7 +71,7 @@ handler.put(async (req, res) => {
 
 handler.delete(async (req, res) => {
     if(req.query?.ID){
-        Product.find({ _id: req.query.ID  }).remove(()=>{
+        Equipment.find({ _id: req.query.ID  }).remove(()=>{
             res.send({
                 success: true,
                 message: 'Product deleted successfully'
