@@ -67,8 +67,6 @@ handler.put(async (req, res) => {
     }
 });
 
-
-
 handler.use(isAdmin).delete(async (req, res) => {
     if(req.query?.ID){
         Bodypart.find({ _id: req.query.ID  }).remove(()=>{
