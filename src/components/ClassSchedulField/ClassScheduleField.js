@@ -6,7 +6,7 @@ import CategoryModal from "../CategoryModal/CategoryModal";
 import { authPost, getData } from "./../../../__lib__/helpers/HttpService";
 
 const ClassScheduleField = () => {
-   const [staffs, setStaffs] = useState([])
+  const [staffs, setStaffs] = useState([]);
 
   const [trigger, setTrigger] = useState(false);
   const cookies = new Cookies();
@@ -15,7 +15,7 @@ const ClassScheduleField = () => {
   useEffect(() => {
     // getData('/admin/categories')
     // .then(data => setCategories(data))
-    getData('/admin/staffs').then(data => setStaffs(data))
+    getData("/admin/staffs").then((data) => setStaffs(data));
   }, []);
 
   const {
@@ -27,23 +27,10 @@ const ClassScheduleField = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    console.log(data)
-    const admins = await cookies.get("_admin");
-    const formData = await new FormData();
-    formData.append("className", data.className);
-    formData.append("staffMember", data.staffMember);
-    formData.append("startDate", data.startDate);
-    formData.append("endDate", data.endDate);
-    formData.append("selectedDate", data.selectedDate);
-    formData.append("memberLimit", data.memberLimit);
-    formData.append("startTime", data.startTime);
-    formData.append("endTime", data.endTime);
-    formData.append("_owner", admins.admin._id);
-    await submitData(formData);
-  };
+    console.log(data);
 
-  const submitData = async (data) => {
     setDisable(true);
+
     const admins = await cookies.get("_admin");
     authPost("/admin/class-shedule", data, admins.token).then((res) => {
       if (res.success) {
@@ -106,7 +93,7 @@ const ClassScheduleField = () => {
                             <option selected>Select Staff</option>
                             {staffs?.length > 0 &&
                               staffs?.map((staff, i) => (
-                                <option key={i} value={i + 1}>
+                                <option key={i} value={staff._id}>
                                   {staff.firstName}
                                 </option>
                               ))}
@@ -117,7 +104,9 @@ const ClassScheduleField = () => {
                       </div>
 
                       {errors.staffMember && (
-                        <div className="text-danger">Please select staff member </div>
+                        <div className="text-danger">
+                          Please select staff member{" "}
+                        </div>
                       )}
                     </div>
                   </div>
@@ -133,10 +122,11 @@ const ClassScheduleField = () => {
                         id="startDate"
                         name="startDate"
                         type="date"
-                        
                       />
                       {errors.startDate && (
-                        <div className="text-danger">Please select starting date</div>
+                        <div className="text-danger">
+                          Please select starting date
+                        </div>
                       )}
                     </div>
                   </div>
@@ -153,7 +143,9 @@ const ClassScheduleField = () => {
                         type="date"
                       />
                       {errors.startDate && (
-                        <div className="text-danger">Please select ending date</div>
+                        <div className="text-danger">
+                          Please select ending date
+                        </div>
                       )}
                     </div>
                   </div>
@@ -170,7 +162,9 @@ const ClassScheduleField = () => {
                         type="date"
                       />
                       {errors.selectedDate && (
-                        <div className="text-danger">Please select selected date</div>
+                        <div className="text-danger">
+                          Please select selected date
+                        </div>
                       )}
                     </div>
                   </div>
@@ -188,7 +182,9 @@ const ClassScheduleField = () => {
                         placeholder="Member limit"
                       />
                       {errors.memberLimit && (
-                        <div className="text-danger">Please add member limit</div>
+                        <div className="text-danger">
+                          Please add member limit
+                        </div>
                       )}
                     </div>
                   </div>
@@ -205,7 +201,9 @@ const ClassScheduleField = () => {
                         type="time"
                       />
                       {errors.startTime && (
-                        <div className="text-danger">Please select staring time</div>
+                        <div className="text-danger">
+                          Please select staring time
+                        </div>
                       )}
                     </div>
                   </div>
@@ -222,11 +220,13 @@ const ClassScheduleField = () => {
                         type="time"
                       />
                       {errors.endTime && (
-                        <div className="text-danger">Please select staring time</div>
+                        <div className="text-danger">
+                          Please select staring time
+                        </div>
                       )}
                     </div>
                   </div>
-                 
+
                   {/* <div className="col-md-6 col-12">
                     <div className="mb-1">
                       <label htmlFor="customFile1" className="form-label">

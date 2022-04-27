@@ -1,6 +1,6 @@
 import React from "react";
 
-const Modals = ({trigger, setTrigger, children}) => {
+const Modals = ({trigger, setTrigger, children, size}) => {
 
     // useEffect(() => {
     //     const closeModal = (e) => {
@@ -24,14 +24,13 @@ const Modals = ({trigger, setTrigger, children}) => {
         style={{ display: `${trigger ? 'block': 'none'}`, background: '#000000a3', transition: 'all 0.5s'}}
         aria-hidden="true"
       >
-        <div className="modal-dialog modal-dialog-centered">
+        <div className={`modal-dialog modal-dialog-centered ${size}`}>
           <div className="modal-content">
             <div className="modal-header bg-transparent">
               <button
               onClick={() => setTrigger(false)}
                 type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
+                className="btn-close" 
                 aria-label="Close"
               />
             </div>

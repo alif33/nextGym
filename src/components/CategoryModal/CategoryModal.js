@@ -42,7 +42,7 @@ const CategoryModal = ({trigger,setTrigger}) => {
   }
     return (
         <>
-             <Modals trigger={trigger} setTrigger={setTrigger}>
+             <Modals trigger={trigger} setTrigger={setTrigger} size={''}>
           <h1 className="text-center mb-1" id="addNewCardTitle">
             Add New Category
           </h1>
