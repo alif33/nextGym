@@ -28,7 +28,7 @@ handler.use(upload.single("image")).post(async (req, res) => {
     status,
     ingredients
   } = req.body;
-  console.log(title)
+  
 
   const streamUpload = (req) => {
     return new Promise((resolve, reject) => {

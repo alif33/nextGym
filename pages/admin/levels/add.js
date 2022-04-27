@@ -1,10 +1,10 @@
 import React from "react";
 import { Toaster } from "react-hot-toast";
-import AddProduct from "../../../src/components/AddProduct/AddProduct";
 import AdminLayout from "../../../src/components/AdminLayout/AdminLayout";
+import LevelField from "../../../src/components/Levels/LevelField.js/LevelsField";
 import { adminAuth } from "../../../__lib__/helpers/requireAuthentication";
 
-const Add = () => {
+const AddLevel = () => {
   return (
     <AdminLayout>
        <Toaster position="top-center" reverseOrder={false} />
@@ -34,13 +34,13 @@ const Add = () => {
 
       </div>
       <div className="content-body">
-          <AddProduct/>
+         <LevelField/>
       </div>
     </AdminLayout>
   );
 };
 
-export default Add;
+export default AddLevel;
 
 export const getServerSideProps = adminAuth(context => {
   return {
