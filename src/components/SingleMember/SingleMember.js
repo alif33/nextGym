@@ -17,7 +17,6 @@ const SingleMember = ({ memberId }) => {
   const {singleMember} = useSelector(state => state)
   const dispatch = useDispatch()
   const {member, loading} = singleMember;
-console.log(member)
  
   useEffect(() => {
     // getData(`/admin/member/${memberId}`).then((data) => setMember(data));
@@ -25,7 +24,6 @@ console.log(member)
   }, []);
 
   const handleStatus = async (status) => {
-    // console.log(status);
     // const formData = await new FormData();
     // formData.append("status", status);
     // formData.append("valid_", member?.valid_);

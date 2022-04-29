@@ -18,7 +18,6 @@ const staffMale = staffs?.filter(staff => staff.gender === 'MALE')
 const staffFemale = staffs?.filter(staff => staff.gender === 'FEMALE')
 const memberMale = members?.filter(staff => staff.gender === 'MALE')
 const memberFemale = members?.filter(staff => staff.gender === 'FEMALE')
-console.log(memberFemale);
 
   return (
     <>

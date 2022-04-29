@@ -17,7 +17,6 @@ const SingleClassModal = ({ trigger, setTrigger, classId }) => {
     getData(`/admin/class-shedule/${classId}`).then((data) => setClassSchedule(data));
   }, [classId]);
 
-  console.log(classSchedule)
   return (
     <>
       <Modals trigger={trigger} setTrigger={setTrigger} size={"modal-lg"}>

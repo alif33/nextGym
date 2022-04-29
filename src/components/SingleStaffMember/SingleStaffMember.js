@@ -34,7 +34,6 @@ const SingleStaffMember = ({staffId}) => {
    }
   }
 const submitData =(data) => {
-  console.log(data)
 }
 
   return (

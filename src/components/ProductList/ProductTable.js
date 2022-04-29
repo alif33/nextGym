@@ -12,7 +12,6 @@ const ProductTable = ({data}) => {
             setToggle(false);
             
           }
-        // console.log(e.path)
         };
         document.body.addEventListener("click", closeAction);
         return () => document.body.removeEventListener('click', closeAction)

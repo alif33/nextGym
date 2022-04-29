@@ -2,10 +2,12 @@ import dynamic from "next/dynamic";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
+import Select from "react-select";
 import "suneditor/dist/css/suneditor.min.css";
 import Cookies from "universal-cookie";
 import { authPost } from "../../../../__lib__/helpers/HttpService";
 import { getData } from "./../../../../__lib__/helpers/HttpService";
+
 const SunEditor = dynamic(() => import("suneditor-react"), {
   ssr: false,
 });
@@ -14,9 +16,9 @@ const ExerciseAddField = () => {
   const [bodyparts, setBodyparts] = useState([]);
   const [equipments, setEquipments] = useState([]);
   const [levels, setLevels] = useState([]);
-  const [instructions, setInstructions] = useState()
-  const [tips, setTips] = useState()
-
+  const [instructions, setInstructions] = useState();
+  const [tips, setTips] = useState();
+  const [selectBodyparts, setSelectBodyparts] = useState([])
 
   const [trigger, setTrigger] = useState(false);
   const cookies = new Cookies();
@@ -27,7 +29,6 @@ const ExerciseAddField = () => {
     getData("/admin/equipments").then((data) => setEquipments(data));
     getData("/admin/levels").then((data) => setLevels(data));
   }, []);
-  console.log(bodyparts.length <= 0);
 
   const {
     register,
@@ -37,10 +38,14 @@ const ExerciseAddField = () => {
     formState: { errors },
   } = useForm();
 
+  const partsOption = bodyparts?.map(parts => ({
+    label: parts.name,
+    value: parts._id
+}));
+
   const onSubmit = async (data) => {
     const formData = await new FormData();
     formData.append("title", data.title);
-    formData.append("bodyPart", data.bodyPart);
     formData.append("equipment", data.equipment);
     formData.append("level", data.level);
     formData.append("rest", data.rest);
@@ -48,6 +53,10 @@ const ExerciseAddField = () => {
     formData.append("reps", data.reps);
     formData.append("instructions", instructions);
     formData.append("tips", tips);
+    for (let i = 0; i < selectBodyparts?.length; i++) {
+      formData.append('bodyPart[]', selectBodyparts[i].value)
+  }
+
     formData.append("image", data.image[0]);
     await submitData(formData);
   };
@@ -67,13 +76,17 @@ const ExerciseAddField = () => {
     });
   };
 
+  const handleSelectParts = (e) => {
+    setSelectBodyparts(e.value)
+  }
+
   return (
     <section id="multiple-column-form">
       <div className="row">
         <div className="col-12">
           <div className="card">
             <div className="card-header">
-              <h4 className="card-title">Add Equipment</h4>
+              <h4 className="card-title">Add Exercise</h4>
             </div>
             <div className="card-body">
               <form className="form" onSubmit={handleSubmit(onSubmit)}>
@@ -102,22 +115,16 @@ const ExerciseAddField = () => {
                       <label className="form-label" htmlFor="bodyPart">
                         Bodypart
                       </label>
-                      <select
-                        disabled={bodyparts.length <= 0}
-                        {...register("bodyPart", { required: true })}
-                        type="text"
-                        id="bodyPart"
-                        className="form-select"
-                      >
-                        <option selected defaultValue="">
-                          Select bodypart
-                        </option>
-                        {bodyparts?.map((parts, i) => (
-                          <option key={i} value={parts._id}>
-                            {parts.name}
-                          </option>
-                        ))}
-                      </select>
+
+                      <Select
+                        onChange={handleSelectParts}
+                        isMulti
+                        name="colors"
+                        options={partsOption}
+                        className="basic-multi-select"
+                        classNamePrefix="select"
+                      />
+
                       {errors.bodyPart && (
                         <div className="text-danger">Bodypart is required</div>
                       )}
@@ -129,7 +136,7 @@ const ExerciseAddField = () => {
                         Equipment
                       </label>
                       <select
-                        disabled={bodyparts.length <= 0}
+                        disabled={equipments.length <= 0}
                         {...register("equipment", { required: true })}
                         type="text"
                         id="equipment"
@@ -155,7 +162,7 @@ const ExerciseAddField = () => {
                         Levels
                       </label>
                       <select
-                        disabled={bodyparts.length <= 0}
+                        disabled={levels.length <= 0}
                         {...register("level", { required: true })}
                         type="text"
                         id="level"
@@ -247,10 +254,10 @@ const ExerciseAddField = () => {
                       )}
                     </div>
                   </div>
-                 
+
                   <div className="col-md-6 col-12">
                     <div className="mb-1">
-                    <label htmlFor="" className="form-label">
+                      <label htmlFor="" className="form-label">
                         Instructions <span className="text-danger">*</span>
                       </label>
                       <SunEditor
@@ -261,17 +268,12 @@ const ExerciseAddField = () => {
                   </div>
                   <div className="col-md-6 col-12">
                     <div className="mb-1">
-                    <label htmlFor="" className="form-label">
+                      <label htmlFor="" className="form-label">
                         Tips <span className="text-danger">*</span>
                       </label>
-                      <SunEditor
-                        height="260px"
-                        onChange={(e) => setTips(e)}
-                      />
+                      <SunEditor height="260px" onChange={(e) => setTips(e)} />
                     </div>
                   </div>
-
-                 
 
                   <div className="col-12">
                     {disable ? (

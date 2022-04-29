@@ -16,7 +16,6 @@ const ClassTable = ({ data }) => {
       if (e.path[1].tagName !== "BUTTON") {
         setToggle(false);
       }
-      // console.log(e.path)
     };
     document.body.addEventListener("click", closeAction);
     return () => document.body.removeEventListener("click", closeAction);

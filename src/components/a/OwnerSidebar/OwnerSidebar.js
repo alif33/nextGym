@@ -8,7 +8,6 @@ const OwnerSidebar = ({ toggle, setToggle }) => {
    
   useEffect(() => {
     // const closeSidebar = (e) => {
-    //   console.log(e)
     //   if (e.path[1].tagName !== "shape") {
     //     setToggle(false);
     //   }

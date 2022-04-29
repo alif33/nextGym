@@ -44,7 +44,6 @@ const MemberEdit = ({ memberId }) => {
     formData.append("payDate", data.payDate);
     formData.append("image", data.image[0]);
     // await submitData(formData);
-    console.log(data);
   };
 
   const submitData = async (data) => {
