@@ -5,7 +5,6 @@ import StaffEdit from "../../../../src/components/StaffEdit/StaffEdit";
 import { adminAuth } from "../../../../__lib__/helpers/requireAuthentication";
 
 const Edit = ({ staffId }) => {
-  console.log(staffId)
   return (
     <AdminLayout>
       <Toaster position="top-center" reverseOrder={false} />

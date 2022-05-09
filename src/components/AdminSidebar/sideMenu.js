@@ -66,6 +66,24 @@ export const menuItem = [
          },
       ]
      },
+     {id: 40,
+      url: '#',
+      title: 'Exercise',
+      size: '140px',
+      icon: <FileText/>,
+      children: [
+          {id: 1,
+           url: '/admin/exercise/add',
+           title: 'Add',
+           icon: <Circle/>
+         },
+          {id: 2,
+           url: '/admin/exercise/list',
+           title: 'List',
+           icon: <Circle/>
+         },
+      ]
+     },
      {id: 50,
       url: '#',
       title: 'Bodyparts ',

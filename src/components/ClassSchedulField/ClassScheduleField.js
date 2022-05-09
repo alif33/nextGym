@@ -27,7 +27,6 @@ const ClassScheduleField = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    console.log(data);
 
     setDisable(true);
 

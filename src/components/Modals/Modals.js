@@ -6,7 +6,6 @@ const Modals = ({trigger, setTrigger, children, size}) => {
     //     const closeModal = (e) => {
     //       if (e.path[0].tagName === 'span') {
     //     //   setTrigger(tru);
-    //         console.log(true)
     //       }else{
     //         //   setTrigger(false)
     //       }

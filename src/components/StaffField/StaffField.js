@@ -27,7 +27,6 @@ const StaffField = () => {
     formData.append("image", data.image[0]);
     await submitData(formData);
   };
-console.log(errors.firstName ? true: false)
   const submitData = async (data) => {
     setDisable(true)
     const admins = await cookies.get("_admin");

@@ -11,7 +11,6 @@ const StaffEdit = ({ staffId }) => {
     getData(`/admin/staff/${staffId}`).then((data) => setStaff(data));
   }, []);
   
-  console.log(staff);
   const male = staff?.gender === "MALE";
   const female = staff?.gender === "FEMALE";
 
@@ -38,7 +37,6 @@ const StaffEdit = ({ staffId }) => {
     formData.append("image", data.image[0]);
     await submitData(formData);
   };
-  console.log(errors.firstName ? true : false);
   const submitData = async (data) => {
     setDisable(true);
     const admins = await cookies.get("_admin");
