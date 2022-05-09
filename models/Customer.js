@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const orderSchema = new mongoose.Schema(
+const customerSchema = new mongoose.Schema(
     {
         name: {
             type: String,
@@ -9,26 +9,27 @@ const orderSchema = new mongoose.Schema(
         },
         email: {
             type: String,
-            required: true,
             trim: true
         },
         phone: {
             type: String,
-            required: true,
             trim: true
         },
-        role: {
-            type: Boolean,
-            default: true
-        },
-        message: {
+        country: {
             type: String,
-            required: true,
+            trim: true
+        },
+        city: {
+            type: String,
+            trim: true
+        },
+        adress: {
+            type: String,
             trim: true
         }
     },
     { timestamps: true }
 );
 
-export default mongoose.models.Contact || mongoose.model('Contact', orderSchema);
+export default mongoose.models.Customer || mongoose.model('Customer', customerSchema);
 
