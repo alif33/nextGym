@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCart } from '../../../store/cart/actions';
-import { firstNWord, isExistCart } from '../../../__lib__/helpers/Validator';
+import { firstNWord } from '../../../__lib__/helpers/Validator';
 import _ from 'lodash';
 
 const ProductCard = ({ product }) => {
@@ -27,7 +27,7 @@ const ProductCard = ({ product }) => {
             }
         }
     }
-    console.log(carts.cartList);
+
     return (
         <div className='col col-md-6 col-lg-4 '>
             <div className="card border-1" style={{ height: '270px' }}>
