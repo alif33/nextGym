@@ -11,9 +11,14 @@ export const cartSlice = createSlice({
             state.cartList.push(action.payload);
         },
 
-        updateCart: (state, action) => {
+        increaseCart: (state, action) => {
             const { index, qty } = action.payload;
-            state.cartList[index].qty = qty;
+            ++ state.cartList[index].qty;
+        },
+
+        decreaseCart: (state, action) => {
+            const { index, qty } = action.payload;
+            -- state.cartList[index].qty;
         }
     }
 })
