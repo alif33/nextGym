@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCart } from '../../../store/cart/actions';
 import { firstNWord, isExistCart } from '../../../__lib__/helpers/Validator';
+import _ from 'lodash';
 
 const ProductCard = ({ product }) => {
     const { _id, image, name, price, quantity } = product;
@@ -15,35 +16,18 @@ const ProductCard = ({ product }) => {
 
 
     const handleAddProduct = id => {
-        
         if(carts.cartList.length===0){
             dispatch(setCart(_id, product, 1))
         }else{
-            if(isExistCart(carts.cartList, id)){
-                alert('exists')
+
+            if(_.find(carts.cartList, pro=> pro._p === id)){
+                alert("Exists");
             }else{
                 dispatch(setCart(_id, product, 1))
             }
-            // console.log();
-            // if (isExistCart(carts.cartList, id)) {
-                
-            // }
         }
-        // console.log(); 
-        // console.log("isncall");
-        // console.log(carts.cartList, "kk");
-
-        // console.log(isExistCart(carts.cartList, id), "jj")
-        
-        // if (isHave) {
-        //     alert('is already added')
-        // } else {
-        //     dispatch(setCart(_id, product, 1))
-        // }
-
-
     }
-
+    console.log(carts.cartList);
     return (
         <div className='col col-md-6 col-lg-4 '>
             <div className="card border-1" style={{ height: '270px' }}>
