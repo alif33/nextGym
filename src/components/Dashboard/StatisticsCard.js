@@ -40,12 +40,12 @@ const StatisticsCard = () => {
                 <div className="d-flex flex-row">
                   <div className="avatar bg-light-primary me-2">
                     <div className="avatar-content">
-                      <Users className="avater-con" />
+                      <Users className="avater-icon" />
                     </div>
                   </div>
                   <div className="my-auto">
                     <h4 className="fw-bolder mb-0">{staffs?.length}</h4>
-                    <p className="card-text font-small-3 mb-0">Staff Members</p>
+                    <p className="card-text font-small-3 mb-0">Staffs</p>
                   </div>
                 </div>
               </div>

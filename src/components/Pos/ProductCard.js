@@ -9,38 +9,37 @@ const ProductCard = ({ product }) => {
 
     const { carts } = useSelector(state => state)
     const dispatch = useDispatch()
-   
+
     useEffect(() => {
 
     }, [])
 
     const handleAddProduct = id => {
-        if(carts.cartList.length===0){
+        if (carts.cartList.length === 0) {
             dispatch(setCart(_id, product, 1))
-        }else{
+        } else {
 
-            if(_.find(carts.cartList, pro=> pro._p === id)){
+            if (_.find(carts.cartList, pro => pro._p === id)) {
                 alert("Exists");
-            }else{
+            } else {
                 dispatch(setCart(_id, product, 1))
             }
         }
     }
 
     return (
-        <div className='col col-md-6 col-lg-4 '>
-            <div className="card border-1" style={{ height: '270px' }}>
+        <div className='col col-md-6 '>
+            <div className="card border-1" >
                 <img src={image}
-                    alt="Card image cap " height={120} className="" />
+                    alt="Card image cap " height={150} className="position-relative" />
+                    <h4 className='bg-danger text-white  p-25 position-absolute rounded'>${price}</h4>
                 <div className="card-body">
                     <h5 className="card-title">{ firstNWord(name, 2) }</h5>
                     <p>Quantity: {quantity}</p>
-                    <div className='d-flex justify-content-between align-items-center'>
-                        <button
-                            onClick={(e) => handleAddProduct(_id)}
-                            type="button" className="btn btn-outline-primary p-50" > Add </button>
-                        <button className="btn btn-primary  p-50">${price}</button>
-                    </div>
+
+                    <button
+                        onClick={(e) => handleAddProduct(_id)}
+                        type="button" className="btn btn-outline-primary p-50" > Add </button>
                 </div>
             </div>
         </div>
