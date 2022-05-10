@@ -1,5 +1,6 @@
 import React from "react";
 import AdminLayout from "../../../../src/components/AdminLayout/AdminLayout";
+import ExerciseList from "../../../../src/components/Exercise/ExerciseItems/ExerciseList";
 import ProductList from "../../../../src/components/ProductList/ProductList";
 import { adminAuth } from "../../../../__lib__/helpers/requireAuthentication";
 
@@ -34,7 +35,7 @@ const list = () => {
         </div>
       </div>
       <div className="content-body">
-        <ProductList/>
+        <ExerciseList/>
       </div>
     </AdminLayout>
   );

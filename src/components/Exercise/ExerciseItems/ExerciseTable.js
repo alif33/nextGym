@@ -4,7 +4,6 @@ import * as Icon from 'react-feather';
 
 const ExerciseTable = ({data}) => {
     const [toggle, setToggle] = useState(false)
-
     
     useEffect(() => {
         const closeAction = (e) => {
