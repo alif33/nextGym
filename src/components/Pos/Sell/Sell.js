@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Cookies from "universal-cookie";
 import { setCustomers } from "../../../../store/customers/actions";
 import { authPost } from "../../../../__lib__/helpers/HttpService";
+import CreatePaymentModal from "./CreatePaymentModal";
 import CustomerModal from "./CustomerModal";
 import SelectedProduct from "./SelectedProduct";
 import TDS from "./TDS";
@@ -16,12 +17,11 @@ const Sell = () => {
 
     const dispatch = useDispatch()
     const { customers } = useSelector(state => state)
-    const [trigger, setTrigger] = useState(false);
+    const [customer, setCustomer] = useState(false);
+    const [payment, setPayment] = useState(false)
     const cookies = new Cookies();
     const [disable, setDisable] = useState(false);
-    const [tds, setTDS] = useState({})
     const [handleFormData, setHandleFormData] = useState({})
-
 
     useEffect(() => {
         dispatch(setCustomers())
@@ -33,15 +33,11 @@ const Sell = () => {
         setHandleFormData(values => ({ ...values, [name]: value }))
 
     }
-
-    console.log(handleFormData)
-
     const handleSubmit = async (e) => {
         e.preventDefault()
 
         const formData = await new FormData();
         formData.append("title", e);
-
 
         // await submitData(formData);
     };
@@ -64,7 +60,8 @@ const Sell = () => {
     const { customersList } = customers;
     return (
         <section id="multiple-column-form">
-            {trigger && <CustomerModal trigger={trigger} setTrigger={setTrigger} />}
+            {customer && <CustomerModal trigger={customer} setTrigger={setCustomer} />}
+            {payment && <CreatePaymentModal trigger={payment} setTrigger={setPayment} />}
             <div className="row">
                 <div className="col-12">
                     <div className="card">
@@ -92,7 +89,7 @@ const Sell = () => {
 
                                                 </select>
                                                 <div data-v-aa799a9e className="input-group-prepend">
-                                                    <div onClick={() => setTrigger(true)} data-v-aa799a9e className="input-group-text" style={{ cursor: 'pointer' }}><User /></div>
+                                                    <div onClick={() => setCustomer(true)} data-v-aa799a9e className="input-group-text" style={{ cursor: 'pointer' }}><User /></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -109,8 +106,12 @@ const Sell = () => {
                                             </div>
                                             <div className="col-12 col-md-6">
                                                 <button className="btn btn-primary waves-effect w-100"
-                                                    type="submit"
-                                                    onClick={(e) => handleSubmit(e)}
+                                                    type="button"
+                                                    onClick={(e) => {
+                                                        setPayment(true)
+                                                        handleSubmit(e)
+                                                    }
+                                                    }
                                                 > Pay Now </button>
                                             </div>
                                         </div>

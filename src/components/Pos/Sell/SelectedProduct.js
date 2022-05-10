@@ -1,7 +1,13 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import ProductList from './ProductList';
 
 const SelectedProduct = () => {
+
+    const dispatch = useDispatch()
+    const {carts} = useSelector(state => state)
+    const {cartList} = carts;
+
     return (
         <>
             <div className="table-responsive">
@@ -15,7 +21,7 @@ const SelectedProduct = () => {
                         </tr>
                     </thead>
                     <tbody className="text-center">
-                       <ProductList/>
+                    {cartList?.map((cart, i) => <ProductList cart={cart} key={i}/>)}
                     </tbody>
                 </table>
             </div>
