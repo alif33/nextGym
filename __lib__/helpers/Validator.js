@@ -51,6 +51,14 @@ export const wordFirstUpperCase = (str) => {
     return str2;
 }
 
+export const isExistCart = (arr, _id) => {
+    return arr.filter(res =>res._p === _id);
+}
+
+
+
+// [{id: 1, data: {}, quantity: 1}]
+
 // export const queryValidate = (objectParsed, keyName) => {
 //     const parsedArray = Object.entries(objectParsed)
 //     const filtered = parsedArray.filter(([key, value]) => key !== 'location');

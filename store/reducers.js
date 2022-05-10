@@ -1,5 +1,6 @@
 import { combineReducers } from '@reduxjs/toolkit'
 import { adminSlice } from './admins/slice'
+import { cartSlice } from './cart/slice'
 import { categorySlice } from './catrgories/slice'
 import { customerSlice } from './customers/slice'
 import { memberSlice } from './members/slice'
@@ -12,6 +13,7 @@ export const rootReducer = combineReducers({
     members: memberSlice.reducer,
     singleMember: singleMemberSlice.reducer,
     categories: categorySlice.reducer,
-    customers: customerSlice.reducer
+    customers: customerSlice.reducer,
+    carts: cartSlice.reducer
     
 })

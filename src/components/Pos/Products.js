@@ -15,11 +15,10 @@ const Products = () => {
         getData('/admin/products')
             .then(res => setProducts(res))
     }, [])
-    console.log(products)
     return (
         <div className='row'>
             {
-                products?.length ? products?.map((product, i) => <ProductCard product={product} />)
+                products?.length ? products?.map((product, i) => <ProductCard key={i} product={product} />)
                     : <div className='text-center'>
                         <BounceLoader color={color} loading={loading} size={50} />
                     </div>
