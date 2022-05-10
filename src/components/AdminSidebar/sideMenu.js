@@ -159,12 +159,17 @@ export const menuItem = [
     {id: 4,
      url: '#',
      title: 'POS',
-     size: '100px',
+     size: '140px',
      icon: <CheckSquare/>,
      children: [
       {id: 1,
-       url: '/admin/pos/Sell',
+       url: '/admin/pos/sell',
        title: 'Sell',
+       icon: <Circle/>
+     },
+      {id: 1,
+       url: '/admin/pos/sell-list',
+       title: 'Sell List',
        icon: <Circle/>
      },
      
