@@ -18,8 +18,10 @@ const Products = () => {
         <div className='row'>
             {
                 products?.length ? products?.map((product, i) => <ProductCard key={i} product={product} />)
-                    : <div className='text-center'>
-                        <BounceLoader color={color} loading={loading} size={50} />
+                    : <div className='h-100'>
+                        <div className='d-flex justify-content-center align-items-center'>
+                            <BounceLoader color={color} loading={loading} size={50} />
+                        </div>
                     </div>
             }
 

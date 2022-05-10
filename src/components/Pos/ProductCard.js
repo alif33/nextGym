@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCart } from '../../../store/cart/actions';
-import { firstNWord, isExistCart } from '../../../__lib__/helpers/Validator';
+import { firstNWord } from '../../../__lib__/helpers/Validator';
 import _ from 'lodash';
 
 const ProductCard = ({ product }) => {
