@@ -14,7 +14,6 @@ const ProductCard = ({ product }) => {
 
     }, [])
 
-
     const handleAddProduct = id => {
         if(carts.cartList.length===0){
             dispatch(setCart(_id, product, 1))
@@ -34,7 +33,7 @@ const ProductCard = ({ product }) => {
                 <img src={image}
                     alt="Card image cap " height={120} className="" />
                 <div className="card-body">
-                    <h5 className="card-title">{firstNWord(name, 2)}</h5>
+                    <h5 className="card-title">{ firstNWord(name, 2) }</h5>
                     <p>Quantity: {quantity}</p>
                     <div className='d-flex justify-content-between align-items-center'>
                         <button
