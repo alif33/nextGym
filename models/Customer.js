@@ -23,7 +23,7 @@ const customerSchema = new mongoose.Schema(
             type: String,
             trim: true
         },
-        adress: {
+        address: {
             type: String,
             trim: true
         }
