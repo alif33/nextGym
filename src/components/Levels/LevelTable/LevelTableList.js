@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { getData } from '../../../../__lib__/helpers/HttpService';
 import LevelTable from "./LevelTable";
+import GridLoader from "react-spinners/GridLoader";
 
 const LevelTableList = () => {
+  const [loading, setLoading] = useState(true);
+  const [color, setColor] = useState("#27d37f");
   const [levels, setLevels] = useState([])
 useEffect(()=>{
   getData('/admin/levels')
@@ -20,7 +23,8 @@ useEffect(()=>{
             <h4 className="card-title">Level Lists</h4>
           </div>
          
-          <div className="table-responsive" style={levels?.length < 5 ? {height: '300px'}: {}}>
+        {levels?.length > 0 ?
+            <div className="table-responsive" style={levels?.length < 5 ? {height: '300px'}: {}}>
             <table className="table">
               <thead>
                 <tr>
@@ -35,6 +39,13 @@ useEffect(()=>{
               </tbody>
             </table>
           </div>
+          : 
+          <div className="p-4">
+          <div className="d-flex justify-content-center align-items-center">
+            <GridLoader color={color} loading={loading} size={8} />
+          </div>
+        </div>
+        }
         </div>
       </div>
     </div>
