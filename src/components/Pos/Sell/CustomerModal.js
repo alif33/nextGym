@@ -104,7 +104,7 @@ const CustomerModal = ({ trigger, setTrigger }) => {
                                 id="phone"
                                 name="phone"
                                 className="form-control add-credit-card-mask"
-                                type="text"
+                                type="number"
                                 placeholder="Enter phone"
                             />
                         </div>
