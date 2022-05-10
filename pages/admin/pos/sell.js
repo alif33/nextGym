@@ -3,6 +3,7 @@ import { Toaster } from "react-hot-toast";
 import AdminLayout from "../../../src/components/AdminLayout/AdminLayout";
 import BodypartsField from "../../../src/components/Bodyparts/BodypartsField.js/BodypartsField";
 import StatisticsCard from "../../../src/components/Dashboard/StatisticsCard";
+import Products from "../../../src/components/Pos/Products";
 import Sell from "../../../src/components/Pos/Sell/Sell";
 import { adminAuth } from "../../../__lib__/helpers/requireAuthentication";
 
@@ -39,24 +40,24 @@ const PosSell = () => {
                 <section id="dashboard-ecommerce">
                     <div className="row match-height">
                         {/* Medal Card */}
-                        <div className="col-xl-6 col-md-6 col-12">
+                        <div className="col-xl-6 col-md-6 col-12  order-2 order-md-1">
                            <Sell/>
                         </div>
                        
 
                         {/* Statistics Card  */}
-                        <div className="col-xl-6 col-md-6 col-12">
+                        <div className="col-xl-6 col-md-6 col-12  order-1 order-md-2">
                             <div className="card card-statistics">
                                 <div className="card-header">
-                                    <h4 className="card-title">Statistics</h4>
-                                    <div className="d-flex align-items-center">
+                                    <h4 className="card-title">Product List</h4>
+                                    {/* <div className="d-flex align-items-center">
                                         
-                                    </div>
+                                    </div> */}
                                 </div>
                                 <div className="card-body statistics-body">
-                                    <div className="row">
-                                       
-                                    </div>
+                                    
+                                       <Products/>
+                                    
                                 </div>
                             </div>
                         </div>

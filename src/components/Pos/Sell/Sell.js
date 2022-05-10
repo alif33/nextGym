@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
 import React, { useEffect, useState } from "react";
-import { User } from "react-feather";
+import { User, Percent, DollarSign } from "react-feather";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,6 +8,8 @@ import Cookies from "universal-cookie";
 import { setCustomers } from "../../../../store/customers/actions";
 import { authPost } from "../../../../__lib__/helpers/HttpService";
 import CustomerModal from "./CustomerModal";
+import SelectedProduct from "./SelectedProduct";
+import TDS from "./TDS";
 
 
 const Sell = () => {
@@ -17,26 +19,29 @@ const Sell = () => {
     const [trigger, setTrigger] = useState(false);
     const cookies = new Cookies();
     const [disable, setDisable] = useState(false);
+    const [tds, setTDS] = useState({})
+    const [handleFormData, setHandleFormData] = useState({})
 
 
     useEffect(() => {
         dispatch(setCustomers())
     }, []);
 
-    const {
-        register,
-        handleSubmit,
-        watch,
-        reset,
-        formState: { errors },
-    } = useForm();
+    const handleForm = (e) => {
+        const name = e.target.name
+        const value = e.target.value
+        setHandleFormData(values => ({ ...values, [name]: value }))
 
+    }
 
-    const onSubmit = async (data) => {
-        console.log(data)
+    console.log(handleFormData)
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+
         const formData = await new FormData();
-        formData.append("title", data);
-      
+        formData.append("title", e);
+
 
         // await submitData(formData);
     };
@@ -57,18 +62,17 @@ const Sell = () => {
     };
 
     const { customersList } = customers;
-    console.log(customersList)
     return (
         <section id="multiple-column-form">
-              {trigger && <CustomerModal trigger={trigger} setTrigger={setTrigger}/>}
+            {trigger && <CustomerModal trigger={trigger} setTrigger={setTrigger} />}
             <div className="row">
                 <div className="col-12">
                     <div className="card">
                         <div className="card-header">
-                            <h4 className="card-title">Add Exercise</h4>
+                            {/* <h4 className="card-title">Add Exercise</h4> */}
                         </div>
                         <div className="card-body">
-                            <form className="form" onSubmit={handleSubmit(onSubmit)}>
+                            <form className="form">
                                 <div className="row">
                                     <div className=" col-12">
                                         <div className="mb-1">
@@ -77,51 +81,39 @@ const Sell = () => {
                                             </label>
                                             <div data-v-aa799a9e role="group" className="input-group">
                                                 <select
-                                                    {...register("customer", { required: true })}
                                                     name="customer"
                                                     className="form-select"
                                                     id="customer"
                                                     data-v-aa799a9e
+                                                    onChange={(e) => handleForm(e)}
                                                 >
                                                     <option selected>Select customer</option>
-                                                    {customersList.length > 0 && customersList.map((customer, i) => <option key={i} value={customer._id}>{customer.name}</option>)}
+                                                    {customersList?.length > 0 && customersList?.map((customer, i) => <option key={i} value={customer._id}>{customer.name}</option>)}
 
                                                 </select>
                                                 <div data-v-aa799a9e className="input-group-prepend">
-                                                    <div onClick={() => setTrigger(true)} data-v-aa799a9e className="input-group-text" style={{cursor: 'pointer'}}><User/></div>
+                                                    <div onClick={() => setTrigger(true)} data-v-aa799a9e className="input-group-text" style={{ cursor: 'pointer' }}><User /></div>
                                                 </div>
                                             </div>
                                         </div>
-                                      
+                                        <div className=" mb-5">
+                                            <SelectedProduct />
+                                        </div>
+                                        <TDS handleForm={handleForm} />
                                     </div>
+
                                     <div className="col-12">
-                                        {disable ? (
-                                            <button
-                                                className="btn btn-outline-primary waves-effect"
-                                                type="button"
-                                                disabled
-                                            >
-                                                <span
-                                                    className="spinner-grow spinner-grow-sm"
-                                                    role="status"
-                                                    aria-hidden="true"
-                                                />
-                                                <span className="ms-25 align-middle">Loading...</span>
-                                            </button>
-                                        ) : (
-                                            <button
-                                                type="submit"
-                                                className="btn btn-primary me-1 waves-effect waves-float waves-light"
-                                            >
-                                                Submit
-                                            </button>
-                                        )}
-                                        <button
-                                            type="reset"
-                                            className="btn btn-outline-secondary waves-effect"
-                                        >
-                                            Reset
-                                        </button>
+                                        <div className="row">
+                                            <div className="col-12 col-md-6 mb-1">
+                                                <button type="reset" className="btn btn-danger waves-effect w-100" >  Reset </button>
+                                            </div>
+                                            <div className="col-12 col-md-6">
+                                                <button className="btn btn-primary waves-effect w-100"
+                                                    type="submit"
+                                                    onClick={(e) => handleSubmit(e)}
+                                                > Pay Now </button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </form>
