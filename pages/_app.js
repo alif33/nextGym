@@ -9,6 +9,7 @@ import "../styles/css/components.css";
 import "../styles/css/core/menu/menu-types/vertical-menu.css";
 import "../styles/css/pages/authentication.css";
 import "../styles/css/pages/page-pricing.css";
+import { css } from "@emotion/react";
 
 
 // import '../styles/globals.css';

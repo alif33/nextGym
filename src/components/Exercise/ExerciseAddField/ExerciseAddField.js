@@ -136,7 +136,7 @@ const ExerciseAddField = () => {
                         Equipment
                       </label>
                       <select
-                        disabled={equipments.length <= 0}
+                        disabled={equipments?.length <= 0}
                         {...register("equipment", { required: true })}
                         type="text"
                         id="equipment"
@@ -162,7 +162,7 @@ const ExerciseAddField = () => {
                         Levels
                       </label>
                       <select
-                        disabled={levels.length <= 0}
+                        disabled={levels?.length <= 0}
                         {...register("level", { required: true })}
                         type="text"
                         id="level"

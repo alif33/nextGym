@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { User, Users } from "react-feather";
 import { getData } from "./../../../__lib__/helpers/HttpService";
-
+import GridLoader from "react-spinners/GridLoader";
 const StatisticsCard = () => {
+  const [loading, setLoading] = useState(true);
+  const [color, setColor] = useState("#27d37f");
   const [members, setMembers] = useState([]);
   const [staffs, setStaffs] = useState([])
 
@@ -14,15 +16,16 @@ const StatisticsCard = () => {
 
   }, []);
 
-const staffMale = staffs?.filter(staff => staff.gender === 'MALE')
-const staffFemale = staffs?.filter(staff => staff.gender === 'FEMALE')
-const memberMale = members?.filter(staff => staff.gender === 'MALE')
-const memberFemale = members?.filter(staff => staff.gender === 'FEMALE')
+  const staffMale = staffs?.filter(staff => staff.gender === 'MALE')
+  const staffFemale = staffs?.filter(staff => staff.gender === 'FEMALE')
+  const memberMale = members?.filter(staff => staff.gender === 'MALE')
+  const memberFemale = members?.filter(staff => staff.gender === 'FEMALE')
 
+  console.log(staffs, members)
   return (
     <>
-     {members.length > 0 && staffs.length > 0 &&  <div className="col-xl-8 col-md-6 col-12">
-        <div className="card card-statistics">
+      <div className="col-xl-8 col-md-6 col-12">
+        {staffs?.length > 0 && members?.length ? <div className="card card-statistics">
           <div className="card-header">
             <h4 className="card-title">Statistics</h4>
             <div className="d-flex align-items-center">
@@ -87,8 +90,14 @@ const memberFemale = members?.filter(staff => staff.gender === 'FEMALE')
               </div>
             </div>
           </div>
-        </div>
-      </div>}
+        </div> :
+          <div className="card card-statistics">
+            <div className="d-flex justify-content-center align-items-center h-100">
+              <GridLoader color={color} loading={loading} size={10} />
+            </div>
+          </div>
+        }
+      </div>
     </>
   );
 };

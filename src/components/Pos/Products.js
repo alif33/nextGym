@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getData } from '../../../__lib__/helpers/HttpService';
 import ProductCard from './ProductCard';
-import { css } from "@emotion/react";
 import BounceLoader from "react-spinners/BounceLoader";
 
 
