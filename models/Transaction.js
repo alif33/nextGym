@@ -1,5 +1,21 @@
 import mongoose from 'mongoose';
 
+
+const productSchema = new mongoose.Schema(
+    {
+      qty: { 
+          type: Number, 
+          required: true 
+      },
+      _p: { 
+          type: mongoose.Schema.Types.ObjectId, 
+          ref: 'Product', 
+          required: true 
+      },
+    },
+    { timestamps: true }
+  );
+
 const transactionSchema = new mongoose.Schema(
     {
         customer: {
@@ -7,11 +23,7 @@ const transactionSchema = new mongoose.Schema(
             ref: 'Customer', 
             required: true 
         },
-        products: [{
-            type: mongoose.Schema.Types.ObjectId, 
-            ref: 'Product', 
-            required: true 
-        }],
+        products: [productSchema],
         subTotal: {
             type: Number,
             required: true 
