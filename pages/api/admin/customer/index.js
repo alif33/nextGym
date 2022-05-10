@@ -13,7 +13,7 @@ handler.post(async (req, res) => {
     phone,
     country,
     city,
-    adress
+    address
   } = req.body;
   
   await db.connect();
@@ -23,7 +23,7 @@ handler.post(async (req, res) => {
     phone,
     country,
     city,
-    adress
+    address
   });
   if (await customer.save()) {
     await db.disconnect();

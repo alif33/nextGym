@@ -6,7 +6,7 @@ import StatisticsCard from "../../../src/components/Dashboard/StatisticsCard";
 import Sell from "../../../src/components/Pos/Sell/Sell";
 import { adminAuth } from "../../../__lib__/helpers/requireAuthentication";
 
-const AddBodyparts = () => {
+const PosSell = () => {
     return (
         <AdminLayout>
             <Toaster position="top-center" reverseOrder={false} />
@@ -40,21 +40,7 @@ const AddBodyparts = () => {
                     <div className="row match-height">
                         {/* Medal Card */}
                         <div className="col-xl-6 col-md-6 col-12">
-                            <div className="card card-congratulation-medal">
-                                <div className="card-body">
-                                    <h5>Congratulations 🎉 John!</h5>
-                                    <p className="card-text font-small-3">
-                                        You have won gold medal
-                                    </p>
-                                    <h3 className="mb-75 mt-2 pt-50">
-                                        <a href="#">$48.9k</a>
-                                    </h3>
-                                    <button type="button" className="btn btn-primary">
-                                        View Sales
-                                    </button>
-                                    
-                                </div>
-                            </div>
+                           <Sell/>
                         </div>
                        
 
@@ -84,7 +70,7 @@ const AddBodyparts = () => {
     );
 };
 
-export default AddBodyparts;
+export default PosSell;
 
 export const getServerSideProps = adminAuth(context => {
     return {

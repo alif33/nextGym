@@ -3,8 +3,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from 'react-redux';
 import Cookies from "universal-cookie";
-import { setCategories } from "../../../store/catrgories/actions";
-import CategoryModal from "../CategoryModal/CategoryModal";
+import { setCustomers } from "../../../store/customers/actions";
 import { authPost } from "./../../../__lib__/helpers/HttpService";
 
 const AddProduct = () => {
@@ -18,7 +17,7 @@ const AddProduct = () => {
   useEffect(() => {
     // getData('/admin/categories')
     // .then(data => setCategories(data))
-      dispatch(setCategories())
+      dispatch(setCustomers())
   }, [])
 
   const {categoryList} = categories

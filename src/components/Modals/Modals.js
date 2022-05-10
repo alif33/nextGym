@@ -33,7 +33,7 @@ const Modals = ({trigger, setTrigger, children, size}) => {
                 aria-label="Close"
               />
             </div>
-            <div className="modal-body px-sm-5 mx-50 pb-5">
+            <div className="modal-body px-sm-5 mx-30 pb-5">
                 {children}
             </div>
           </div>
