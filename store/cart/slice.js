@@ -12,13 +12,14 @@ export const cartSlice = createSlice({
         },
 
         increaseCart: (state, action) => {
-            const { index, qty } = action.payload;
+            console.log(action)
+            const { index } = action.payload;
             ++ state.cartList[index].qty;
         },
 
-        decreaseCart: (state, action) => {
-            const { index, qty } = action.payload;
-            -- state.cartList[index].qty;
-        }
+        // decreaseCart: (state, action) => {
+        //     const { index } = action.payload;
+        //     -- state.cartList[index].qty;
+        // }
     }
 })

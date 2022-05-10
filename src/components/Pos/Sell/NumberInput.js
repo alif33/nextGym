@@ -13,7 +13,7 @@ const NumberInput = ({ name, icon, handleForm }) => {
                             onChange={(e) => handleForm(e)}
                             name={name.toLowerCase()}
                             id={name.toLowerCase()}
-                            className="form-control" placeholder="00" type="number" />
+                            className="form-control p-50" placeholder="00" type="number" />
 
                         <div data-v-aa799a9e className="input-group-prepend">
                             <div data-v-aa799a9e className="input-group-text">

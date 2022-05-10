@@ -21,7 +21,7 @@ const SelectedProduct = () => {
                         </tr>
                     </thead>
                     <tbody className="text-center">
-                    {cartList?.map((cart, i) => <ProductList cart={cart} key={i}/>)}
+                    {cartList?.map((cart, i) => <ProductList cart={cart} index={i} key={i}/>)}
                     </tbody>
                 </table>
             </div>
