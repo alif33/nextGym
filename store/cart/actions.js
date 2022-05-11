@@ -10,3 +10,6 @@ export const increaseCart = index => (dispatch) => {
 export const decreaseCart = index => (dispatch) => {
     dispatch(slice.decreaseCart(index))
 }
+export const removeCart = newCart => (dispatch) => {
+    dispatch(slice.removeCart(newCart))
+}

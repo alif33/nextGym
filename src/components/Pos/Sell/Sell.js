@@ -9,6 +9,7 @@ import { setCustomers } from "../../../../store/customers/actions";
 import { authPost } from "../../../../__lib__/helpers/HttpService";
 import CreatePaymentModal from "./CreatePaymentModal";
 import CustomerModal from "./CustomerModal";
+import ReciptModal from "./ReciptModal";
 import SelectedProduct from "./SelectedProduct";
 import TDS from "./TDS";
 
@@ -19,6 +20,7 @@ const Sell = () => {
     const { customers } = useSelector(state => state)
     const [customer, setCustomer] = useState(false);
     const [payment, setPayment] = useState(false)
+    const [reciptModal, setReciptModal] = useState(false)
     const cookies = new Cookies();
     const [disable, setDisable] = useState(false);
     const [handleFormData, setHandleFormData] = useState({})
@@ -61,7 +63,8 @@ const Sell = () => {
     return (
         <section id="multiple-column-form">
             {customer && <CustomerModal trigger={customer} setTrigger={setCustomer} />}
-            {payment && <CreatePaymentModal trigger={payment} setTrigger={setPayment} />}
+            {payment && <CreatePaymentModal reciptModal={reciptModal} setReciptModal={setReciptModal} trigger={payment} setTrigger={setPayment} />}
+            {reciptModal && <ReciptModal trigger={reciptModal} setTrigger={setReciptModal} />}
             <div className="row">
                 <div className="col-12">
                     <div className="card">

@@ -21,6 +21,10 @@ export const cartSlice = createSlice({
             --state.cartList[action.payload].qty;
             state.cartList[action.payload].subTotal = parseFloat( state.cartList[action.payload].data.price) * state.cartList[action.payload].qty;
 
-        }
+        },
+        removeCart: (state, action) => {
+            state.cartList = action.payload
+           
+        },
     }
 })

@@ -8,11 +8,9 @@ import { useDispatch, useSelector } from 'react-redux';
 const TDS = ({ handleForm }) => {
     const dispatch = useDispatch()
     const { carts } = useSelector(state => state)
-    console.log(carts.cartList)
 
     const grandTotal = _.sumBy(carts.cartList, cart =>  { return cart.subTotal; }); 
 
-    console.log(grandTotal)
 
     return (
         <>
