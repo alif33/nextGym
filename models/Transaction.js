@@ -28,10 +28,6 @@ const transactionSchema = new mongoose.Schema(
             required: true 
         },
         products: [productSchema],
-        subTotal: {
-            type: Number,
-            required: true 
-        },
         total: {
             type: Number,
             required: true 
