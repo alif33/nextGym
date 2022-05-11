@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Plus, Minus } from "react-feather";
+import { Plus, Minus, X } from "react-feather";
 import { useDispatch, useSelector } from 'react-redux';
 import { increaseCart, setCart, decreaseCart } from '../../../../store/cart/actions';
 import { firstNWord } from '../../../../__lib__/helpers/Validator';
@@ -35,8 +35,11 @@ const ProductList = ({ cart, index }) => {
 
                 </td>
 
-                <td>
+                <td className=''>
                     <NumberFormat value={cart.subTotal} displayType={'text'} thousandSeparator={true} prefix={'$'} />
+                   <span className='ms-25'>
+                        <X className='btn p-25' onClick={() => console.log('click hocche')} color='red' size={30}/>
+                        </span>
                 </td>
             </tr>
         </>
