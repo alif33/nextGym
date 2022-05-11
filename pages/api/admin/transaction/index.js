@@ -18,7 +18,6 @@ handler.post(async (req, res) => {
   const transaction = new Transaction({
     customer,
     products,
-    subTotal,
     total
   });
   // return res.send(req.body);

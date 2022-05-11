@@ -4,14 +4,18 @@ import mongoose from 'mongoose';
 const productSchema = new mongoose.Schema(
     {
       qty: { 
-          type: Number, 
-          required: true 
+        type: Number, 
+        required: true 
       },
       _p: { 
-          type: mongoose.Schema.Types.ObjectId, 
-          ref: 'Product', 
-          required: true 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Product', 
+        required: true 
       },
+      subTotal: {
+        type: Number, 
+        required: true 
+      }
     },
     { timestamps: true }
   );
