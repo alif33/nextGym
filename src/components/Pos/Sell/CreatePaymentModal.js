@@ -1,22 +1,20 @@
-import { setRequestMeta } from 'next/dist/server/request-meta';
-import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Cookies from "universal-cookie";
 import { setCustomers } from '../../../../store/customers/actions';
 import { authPost } from '../../../../__lib__/helpers/HttpService';
 import Modals from '../../Modals/Modals';
 import PaymentDetail from './PaymentDetail';
+import _ from 'lodash'
 
 
-const CreatePaymentModal = ({ trigger, setTrigger, reciptModal, setReciptModal }) => {
+const CreatePaymentModal = ({ trigger, setTrigger, setReciptModal, sellInfo }) => {
     const dispatch = useDispatch()
+    const {carts} = useSelector(state => state)
     const [disable, setDisable] = useState(false)
     const cookies = new Cookies();
-    const router = useRouter();
-    const {paymentRecipt, setPaymentRecipt} = useState(false)
     const {
         register,
         handleSubmit,
@@ -31,21 +29,22 @@ const CreatePaymentModal = ({ trigger, setTrigger, reciptModal, setReciptModal }
         setDisable(true)
         const admins = await cookies.get("_admin");
 
-        authPost("/admin/customer", data, admins.token).then((res) => {
+        // authPost("/admin/customer", data, admins.token).then((res) => {
 
-            if (res.success) {
-                toast.success(res.message);
-                reset();
-                setDisable(false);
-                dispatch(setCustomers())
-                c
+        //     if (res.success) {
+        //         toast.success(res.message);
+        //         reset();
+        //         setDisable(false);
+        //         dispatch(setCustomers())
+        //         c
 
-            } else {
-                setDisable(false);
-                toast.error(res.message)
-            }
-        });
+        //     } else {
+        //         setDisable(false);
+        //         toast.error(res.message)
+        //     }
+        // });
     }
+    const grandTotal = _.sumBy(carts.cartList, cart =>  { return cart.subTotal; }); 
     return (
         <>
             <Modals trigger={trigger} setTrigger={setTrigger} size={'modal-lg'}>
@@ -68,6 +67,7 @@ const CreatePaymentModal = ({ trigger, setTrigger, reciptModal, setReciptModal }
                                 </label>
                                 <div className="input-group input-group-merge">
                                     <input
+                                        defaultValue={`${grandTotal}.00`}
                                         placeholder='00'
                                         {...register("receivedAmount", { required: false })}
                                         id="receivedAmount"
@@ -90,6 +90,7 @@ const CreatePaymentModal = ({ trigger, setTrigger, reciptModal, setReciptModal }
                                     <input
 
                                         {...register("payingAmount", { required: false })}
+                                        defaultValue={`${grandTotal}.00`}
                                         id="payingAmount"
                                         name="payingAmount"
                                         className="form-control add-credit-card-mask"
@@ -157,7 +158,7 @@ const CreatePaymentModal = ({ trigger, setTrigger, reciptModal, setReciptModal }
                     <div className='col-12 col-md-6'>
                         <div className='card mt-4'>
                             <div className='card-body'>
-                                <PaymentDetail />
+                                <PaymentDetail sellInfo={sellInfo} />
                             </div>
                         </div>
                     </div>

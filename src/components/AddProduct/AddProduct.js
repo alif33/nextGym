@@ -4,6 +4,7 @@ import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from 'react-redux';
 import Cookies from "universal-cookie";
 import { setCustomers } from "../../../store/customers/actions";
+import CategoryModal from "../CategoryModal/CategoryModal";
 import { authPost } from "./../../../__lib__/helpers/HttpService";
 
 const AddProduct = () => {
