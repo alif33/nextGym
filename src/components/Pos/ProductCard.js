@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setCart } from '../../../store/cart/actions';
 import { firstNWord } from '../../../__lib__/helpers/Validator';
 import _ from 'lodash';
+import NumberFormat from 'react-number-format';
 
 const ProductCard = ({ product }) => {
     const { _id, image, name, price, quantity } = product;
@@ -32,7 +33,9 @@ const ProductCard = ({ product }) => {
             <div className="card border-1" >
                 <img src={image}
                     alt="Card image cap " height={150} className="position-relative" />
-                    <h4 className='bg-danger text-white  p-25 position-absolute rounded'>${price}</h4>
+                    <h4 className='bg-danger text-white  p-25 position-absolute rounded'>
+                    <NumberFormat value={price} displayType={'text'} thousandSeparator={true} prefix={'$'} />
+                    </h4>
                 <div className="card-body">
                     <h5 className="card-title">{ firstNWord(name, 2) }</h5>
                     <p>Quantity: {quantity}</p>

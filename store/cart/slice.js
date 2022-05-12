@@ -6,20 +6,25 @@ export const cartSlice = createSlice({
         cartList: [],
     },
     reducers: {
-    
+
         setCart: (state, action) => {
             state.cartList.push(action.payload);
         },
 
         increaseCart: (state, action) => {
-            console.log(action)
-            const { index } = action.payload;
-            ++ state.cartList[index].qty;
+            ++state.cartList[action.payload].qty;
+            state.cartList[action.payload].subTotal =   parseFloat( state.cartList[action.payload].data.price) * state.cartList[action.payload].qty;
+
         },
 
-        // decreaseCart: (state, action) => {
-        //     const { index } = action.payload;
-        //     -- state.cartList[index].qty;
-        // }
+        decreaseCart: (state, action) => {
+            --state.cartList[action.payload].qty;
+            state.cartList[action.payload].subTotal = parseFloat( state.cartList[action.payload].data.price) * state.cartList[action.payload].qty;
+
+        },
+        removeCart: (state, action) => {
+            state.cartList = action.payload
+           
+        },
     }
 })
