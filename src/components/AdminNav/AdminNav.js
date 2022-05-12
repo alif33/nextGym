@@ -37,7 +37,7 @@ const AdminNav = ({ toggle, setToggle }) => {
       <nav className="header-navbar navbar navbar-expand-lg align-items-center floating-nav navbar-light navbar-shadow container-xxl">
         <div className="navbar-container d-flex content">
           <div className="bookmark-wrapper d-flex align-items-center">
-            <ul className="nav navbar-nav d-xl-none">
+            {/* <ul className="nav navbar-nav d-xl-none">
               <li className="nav-item">
                 <a
                   onClick={() => setToggle((prev) => !prev)}
@@ -49,8 +49,8 @@ const AdminNav = ({ toggle, setToggle }) => {
                   <Menu />
                 </a>
               </li>
-            </ul>
-            <ul className="nav navbar-nav bookmark-icons">
+            </ul> */}
+            {/* <ul className="nav navbar-nav bookmark-icons">
               <li className="nav-item d-none d-lg-block">
                 <a
                   className="nav-link"
@@ -95,8 +95,8 @@ const AdminNav = ({ toggle, setToggle }) => {
                   <CheckSquare />
                 </a>
               </li>
-            </ul>
-            <ul className="nav navbar-nav">
+            </ul> */}
+            {/* <ul className="nav navbar-nav">
               <li className="nav-item d-none d-lg-block">
                 <a className="nav-link bookmark-star">
                   <i className="ficon text-warning" data-feather="star" />
@@ -115,10 +115,10 @@ const AdminNav = ({ toggle, setToggle }) => {
                   <ul className="search-list search-list-bookmark" />
                 </div>
               </li>
-            </ul>
+            </ul> */}
           </div>
           <ul className="nav navbar-nav align-items-center ms-auto">
-            <li className="nav-item dropdown dropdown-language">
+            {/* <li className="nav-item dropdown dropdown-language">
               <a
                 className="nav-link dropdown-toggle"
                 id="dropdown-flag"
@@ -547,7 +547,7 @@ const AdminNav = ({ toggle, setToggle }) => {
                   </a>
                 </li>
               </ul>
-            </li>
+            </li> */}
             <li className="nav-item dropdown dropdown-user">
               <a
                 onClick={() => setShowProfile(!showProfile)}
