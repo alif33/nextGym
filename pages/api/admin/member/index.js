@@ -23,7 +23,13 @@ const handler = nc({ onError });
 const upload = multer();
 
 
-handler.use(upload.single('image'), isAdmin).post(async (req, res) => {
+handler.use(upload.single('image')).post(async (req, res) => {
+
+  const fu =+new Date('2022.05.17');
+  const cu =+new Date();
+  const consume = fu-cu;
+
+  return res.send(Math.floor(consume / (1000 * 60 * 60 * 24)));
     const { 
       firstName, 
       lastName, 
@@ -36,6 +42,8 @@ handler.use(upload.single('image'), isAdmin).post(async (req, res) => {
       valid_, 
       payDate 
     } = req.body;
+
+
 
     const streamUpload = (req) => {
       return new Promise((resolve, reject) => {
